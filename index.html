@@ -1,0 +1,929 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zipeng (Cooper) Guo</title>
+<meta name="description" content="Zipeng (Cooper) Guo, Ph.D. student in Urban and Regional Sciences at Texas A&M University. Research on how people use urban parks, using smartphone mobility data; landscape design.">
+<meta property="og:title" content="Zipeng (Cooper) Guo">
+<meta property="og:description" content="Smartphone mobility data, human behavior, and urban parks. Ph.D. student, Texas A&M University.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/park-value-network.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E1726'/%3E%3Cpath d='M12 50 Q 26 18 44 22' stroke='%236FD3DC' stroke-width='3' fill='none'/%3E%3Ccircle cx='44' cy='22' r='10' fill='%23F2C230'/%3E%3Ccircle cx='20' cy='44' r='5' fill='%23EF5B5B'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* page */
+  --paper:#F6F7FA;
+  --tint:#E9EFF7;
+  --ink:#15213B;
+  --soft:#5A6680;
+  --rule:rgba(21,33,59,.13);
+  --link:#2563A8;
+  /* map + figure */
+  --night:#0E1726;
+  --band:#141414;
+  --yellow:#F2C230;
+  --coral:#EF5B5B;
+  --pink:#F49AC1;
+  --blue:#4C8DD6;
+  --green:#43B36A;
+  --lilac:#B98BD6;
+  --cyan:#6FD3DC;
+  /* research themes */
+  --t-value:var(--yellow);
+  --t-design:var(--green);
+  --t-access:var(--coral);
+  --t-site:var(--blue);
+  --wrap:1180px;
+  --gutter:clamp(16px,4vw,40px);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#0F1520;
+    --tint:#151E2C;
+    --ink:#E5E9F1;
+    --soft:#9AA6BC;
+    --rule:rgba(229,233,241,.13);
+    --link:#7DB3EE;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Archivo",system-ui,sans-serif;font-stretch:100%;
+  font-size:17px;line-height:1.6;font-weight:400;font-variant-numeric:tabular-nums;
+}
+img{max-width:100%;display:block}
+a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--link);outline-offset:3px;border-radius:3px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gutter)}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:var(--paper);padding:8px 14px;z-index:100}
+.skip:focus{left:8px}
+
+/* ---------- Top bar ---------- */
+.topbar{position:fixed;inset:0 0 auto 0;z-index:50;transition:background-color .25s,box-shadow .25s}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.topbar.solid,.topbar:has(.nav.open){background:var(--paper);box-shadow:0 1px 0 var(--rule)}
+.mark{font-stretch:118%;font-weight:650;font-size:17px;color:var(--ink);text-decoration:none}
+.nav{display:flex;align-items:center;gap:26px}
+.nav a{color:var(--ink);text-decoration:none;font-size:15px;padding:4px 0;border-bottom:2px solid transparent}
+.nav a:hover,.nav a[aria-current="true"]{border-bottom-color:var(--yellow)}
+.nav a.cv{border:1.5px solid var(--ink);padding:5px 14px;border-radius:999px}
+.nav a.cv:hover{background:var(--ink);color:var(--paper)}
+.menu-btn{display:none;background:none;border:1.5px solid var(--ink);color:var(--ink);font:inherit;font-size:14px;padding:5px 14px;border-radius:999px;cursor:pointer}
+
+/* ---------- Hero: visits to Austin parks on a tilted street map ---------- */
+.hero{--map:#E7EAEE;--card:rgba(255,255,255,.88);--card-line:rgba(21,33,59,.08);
+  position:relative;min-height:max(700px,100svh);background:var(--map);overflow:hidden;display:flex;align-items:flex-end}
+.hero-map,.hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero-map{object-fit:none;object-position:0 0;user-select:none;-webkit-user-drag:none}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(90deg,var(--map) 0%,color-mix(in srgb,var(--map) 70%,transparent) 26%,transparent 52%)}
+.hero canvas{z-index:1}
+.hero.map-short .hero-map{-webkit-mask-image:linear-gradient(#000 72%,transparent);mask-image:linear-gradient(#000 72%,transparent)}
+.hero-inner{position:relative;z-index:2;width:100%;max-width:var(--wrap);margin:0 auto;padding:120px var(--gutter) 48px;display:grid;grid-template-columns:repeat(12,1fr);gap:0 24px;align-items:end;pointer-events:none}
+.hero-text{grid-column:1 / span 7;grid-row:1}
+.name{margin:0 0 22px;font-stretch:118%;font-weight:640;font-size:clamp(40px,5.1vw,72px);line-height:1;letter-spacing:-.01em;color:var(--ink)}
+.name .nick{font-weight:360}
+.panel{pointer-events:auto;background:var(--card);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  border:1px solid var(--card-line);border-radius:14px;padding:22px 24px 20px;max-width:580px;box-shadow:0 18px 40px -24px rgba(21,33,59,.35)}
+.who{display:flex;align-items:center;gap:16px;margin:0 0 14px}
+.avatar{flex:none;width:84px;height:84px;border-radius:50%;padding:3px;
+  background:conic-gradient(from 210deg,var(--yellow),var(--coral),var(--pink),var(--lilac),var(--blue),var(--cyan),var(--green),var(--yellow))}
+.avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:50% 22%;border:2px solid #fff}
+.role{margin:0;font-stretch:110%;font-weight:560;font-size:17px;line-height:1.35}
+.statement{margin:0 0 12px}
+.market{margin:0 0 16px;color:var(--soft);font-size:15px}
+.hint-inline{display:none;margin:0 0 14px;color:var(--soft);font-size:14px}
+.links{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;margin:0;padding:0;list-style:none;font-size:15px}
+.hero .links a{color:var(--ink)}
+.hero .links a.primary{background:var(--ink);color:#fff;text-decoration:none;padding:7px 16px;border-radius:999px;font-weight:600}
+.hero .links a.primary:hover{background:var(--link)}
+.legend-wrap{position:absolute;z-index:2;top:92px;left:0;right:0;max-width:var(--wrap);margin:0 auto;padding:0 var(--gutter);display:flex;justify-content:flex-end;pointer-events:none}
+.legend{width:240px;pointer-events:auto;
+  background:var(--card);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  border:1px solid var(--card-line);border-radius:12px;padding:14px 16px;font-size:13px;line-height:1.45;color:var(--soft)}
+.legend p{margin:0 0 8px}
+.legend .lg-title{color:var(--ink);font-weight:600;font-stretch:110%;font-size:13.5px}
+.legend .keys{list-style:none;margin:0 0 10px;padding:0;color:var(--ink)}
+.legend .keys li{display:flex;align-items:center;gap:10px;padding:2px 0}
+.legend svg{flex:none}
+.legend .count{margin:10px 0 4px;padding-top:10px;border-top:1px solid var(--card-line);color:var(--ink);font-size:13.5px}
+.legend .count b{font-stretch:118%;font-weight:640;font-size:22px;margin-right:7px;letter-spacing:-.01em}
+.legend .fine{margin:0;font-size:12px}
+@media (prefers-color-scheme:dark){
+  .hero{--map:#121821;--card:rgba(15,21,32,.86);--card-line:rgba(229,233,241,.1)}
+  .legend .plate-icon .wall{fill:#0A0D12}
+  .legend .plate-icon .top{fill:#1E2734;stroke:#8D9BB0}
+  .avatar img{border-color:var(--night)}
+  .hero .links a.primary{background:var(--yellow);color:var(--night)}
+  .nav a.cv:hover{background:var(--yellow);border-color:var(--yellow);color:var(--night)}
+}
+
+/* ---------- Sections ---------- */
+.section{padding:clamp(72px,10vw,124px) 0;scroll-margin-top:40px}
+.section + .section{border-top:1px solid var(--rule)}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:0 24px}
+.sec-head,.sec-body{grid-column:1 / -1}
+h2{margin:0 0 36px;font-stretch:122%;font-weight:620;font-size:clamp(32px,3.8vw,48px);line-height:1.02;letter-spacing:-.01em}
+h3{margin:0 0 10px;font-stretch:112%;font-weight:600;font-size:22px;line-height:1.25}
+.lede{font-size:19px;line-height:1.55;max-width:62ch;margin:0 0 8px}
+.prose p{max-width:66ch;margin:0 0 18px}
+.muted{color:var(--soft)}
+
+/* Theme colors as a key that runs through Research and Publications */
+[data-t="value"]{--c:var(--t-value)}
+[data-t="design"]{--c:var(--t-design)}
+[data-t="access"]{--c:var(--t-access)}
+[data-t="site"]{--c:var(--t-site)}
+.dot{display:inline-block;width:11px;height:11px;border-radius:50%;background:var(--c);box-shadow:0 0 0 1px rgba(21,33,59,.18);flex:none}
+
+/* About */
+.about-cols{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:72px}
+.facts{margin:0}
+.facts dt{font-stretch:112%;font-weight:600;font-size:15px;margin:0 0 8px;color:var(--soft)}
+.facts dd{margin:0 0 26px}
+.facts ul{list-style:none;margin:0;padding:0}
+.facts li{padding:7px 0;border-top:1px solid var(--rule);font-size:15.5px;line-height:1.45;display:flex;gap:10px;align-items:center}
+.facts li:last-child{border-bottom:1px solid var(--rule)}
+.facts .edu li{display:block}
+.facts .deg{display:block;font-weight:560}
+.facts .where{color:var(--soft)}
+
+/* Featured (band color matches the figure's own background) */
+.featured{background:var(--band);color:#E9EEE4;padding:0 0 clamp(64px,8vw,104px);scroll-margin-top:40px}
+.featured figure{margin:0;position:relative}
+.featured figure img{width:100%;max-height:640px;object-fit:cover;object-position:60% 40%}
+.featured figure::after{content:"";position:absolute;inset:auto 0 0 0;height:38%;background:linear-gradient(to bottom,rgba(20,20,20,0),var(--band))}
+.featured .grid{margin-top:-64px;position:relative}
+.featured .kicker{grid-column:1 / -1;margin:0 0 14px;color:#AEB7C2;font-size:15px}
+.featured h2{grid-column:1 / span 7;font-size:clamp(28px,3.2vw,42px);font-stretch:116%;line-height:1.1;margin:0}
+.featured .f-body{grid-column:8 / span 5}
+.featured .f-body p{margin:0 0 16px}
+.featured .cite{color:#AEB7C2;font-size:14.5px}
+.featured .cite b{color:#fff;font-weight:600}
+.btn-light{display:inline-block;margin-top:6px;background:var(--yellow);color:var(--band);text-decoration:none;padding:8px 18px;border-radius:999px;font-weight:600;font-size:15px}
+.btn-light:hover{background:#fff}
+.featured :focus-visible{outline-color:var(--yellow)}
+
+/* Research themes */
+.themes{list-style:none;margin:40px 0 0;padding:0}
+.theme{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.95fr);gap:40px;padding:40px 0;border-top:1px solid var(--rule);align-items:start}
+.theme:last-child{border-bottom:1px solid var(--rule)}
+.theme h3{display:flex;align-items:center;gap:12px}
+.theme h3 .dot{width:14px;height:14px}
+.theme p{margin:0 0 16px;max-width:60ch}
+.related{list-style:none;margin:0;padding:0;font-size:14.5px;line-height:1.45}
+.related li{padding:5px 0 5px 16px;position:relative;color:var(--soft)}
+.related li::before{content:"";position:absolute;left:0;top:13px;width:8px;height:2px;border-radius:2px;background:var(--c)}
+.related a{color:var(--ink)}
+.plate{margin:0;background:var(--tint);border-radius:10px;aspect-ratio:16/10;position:relative;overflow:hidden}
+.plate canvas{position:absolute;inset:0;width:100%;height:100%}
+.plate img{width:100%;height:100%;object-fit:cover}
+.plate.clear{background:transparent;border-radius:0}
+.plate.clear img{object-fit:contain}
+
+/* Publications */
+.theme-key{display:flex;flex-wrap:wrap;gap:8px 22px;list-style:none;margin:0 0 26px;padding:0;font-size:14px;color:var(--soft)}
+.theme-key li{display:flex;align-items:center;gap:8px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 30px;border-bottom:1px solid var(--rule)}
+.tab{background:none;border:0;border-bottom:3px solid transparent;margin-bottom:-1px;font:inherit;font-size:15.5px;color:var(--soft);padding:10px 4px;margin-right:18px;cursor:pointer}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--yellow);font-weight:560}
+.year-group{display:grid;grid-template-columns:96px minmax(0,1fr);gap:20px;padding:22px 0;border-top:1px solid var(--rule)}
+.year-group:first-child{border-top:0;padding-top:0}
+.year{font-stretch:125%;font-weight:560;font-size:28px;line-height:1}
+.refs{list-style:none;margin:0;padding:0}
+.refs li{position:relative;margin:0 0 18px;padding-left:22px;line-height:1.5;max-width:76ch}
+.refs li::before{content:"";position:absolute;left:0;top:.5em;width:10px;height:10px;border-radius:50%;background:var(--c);box-shadow:0 0 0 1px rgba(21,33,59,.18)}
+.refs li:last-child{margin-bottom:0}
+.refs .me{font-weight:650}
+.refs .src{font-style:italic}
+.refs .kind{display:inline-block;font-size:13px;color:var(--soft);margin-left:4px}
+.refs a{word-break:break-word;font-size:14.5px}
+.scholar-line{margin:26px 0 0;font-size:15px}
+
+/* Teaching */
+.teach-table{width:100%;border-collapse:collapse;margin-top:34px;font-size:15.5px}
+.teach-table th{text-align:left;font-weight:600;font-stretch:112%;font-size:14px;color:var(--soft);padding:0 12px 10px 0;border-bottom:1.5px solid var(--ink)}
+.teach-table td{padding:12px 12px 12px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+.teach-table td.n,.teach-table th.n{text-align:right;padding-right:0}
+.teach-table .course{font-weight:560}
+.teach-table .inst{display:block;color:var(--soft);font-size:14px}
+.teach-table td:first-child{white-space:nowrap;color:var(--soft)}
+
+/* Practice */
+.projects{display:grid;grid-template-columns:1fr 1fr;gap:56px 40px;margin-top:40px}
+.project{margin:0}
+.project .plate{aspect-ratio:16/10;margin-bottom:18px}
+.project h3{font-size:19px;margin-bottom:4px}
+.project .meta{display:flex;justify-content:space-between;gap:12px;font-size:14px;color:var(--soft);margin:0 0 8px;border-bottom:1px solid var(--rule);padding-bottom:8px}
+.project p{margin:0;font-size:15.5px;line-height:1.5}
+
+/* Awards + service */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.ledger{list-style:none;margin:0;padding:0}
+.ledger li{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;padding:10px 0;border-top:1px solid var(--rule);font-size:15.5px;line-height:1.45}
+.ledger li:last-child{border-bottom:1px solid var(--rule)}
+.ledger .y{color:var(--soft);font-weight:560}
+.ledger .lvl{display:block;color:var(--soft);font-size:13.5px}
+
+/* Contact */
+.contact{background:var(--tint);padding:clamp(72px,10vw,120px) 0 40px}
+.mail{display:inline-block;font-stretch:118%;font-weight:600;font-size:clamp(24px,3.4vw,40px);color:var(--ink);text-decoration-color:var(--yellow);text-decoration-thickness:3px;margin:0 0 10px;word-break:break-all}
+.contact-cols{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:40px;margin-top:22px}
+.contact address{font-style:normal;color:var(--soft);line-height:1.55}
+.contact .links{gap:10px 22px}
+.contact .links a{color:var(--ink)}
+.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:80px;padding-top:18px;border-top:1px solid var(--rule);font-size:13.5px;color:var(--soft)}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1040px){
+  .legend-wrap{display:none}
+  .hint-inline{display:block}
+  .hero-text{grid-column:1 / -1}
+}
+@media (max-width:980px){
+  .featured h2,.featured .f-body{grid-column:1 / -1}
+  .featured .f-body{margin-top:22px}
+  .about-cols{grid-template-columns:1fr;gap:20px}
+}
+@media (max-width:860px){
+  .menu-btn{display:inline-block}
+  .nav{display:none;position:absolute;top:64px;left:0;right:0;flex-direction:column;align-items:flex-start;gap:4px;background:var(--paper);padding:12px var(--gutter) 20px;box-shadow:0 1px 0 var(--rule)}
+  .nav.open{display:flex}
+  .nav a{font-size:17px;padding:8px 0}
+  .theme{grid-template-columns:1fr;gap:22px}
+  .theme .plate{order:-1}
+  .projects{grid-template-columns:1fr;gap:44px}
+  .two,.contact-cols{grid-template-columns:1fr}
+}
+@media (max-width:620px){
+  body{font-size:16px}
+  .hero{min-height:max(760px,100svh)}
+  .hero-inner{padding-top:110px;padding-bottom:20px}
+  .name{font-size:9.4vw;margin-bottom:16px}
+  .panel{padding:18px 18px 16px}
+  .avatar{width:72px;height:72px}
+  .role{font-size:15.5px}
+  .year-group{grid-template-columns:1fr;gap:10px}
+  .year{font-size:22px}
+  .teach-table thead{display:none}
+  .teach-table,.teach-table tbody,.teach-table tr,.teach-table td{display:block;width:100%}
+  .teach-table tr{padding:12px 0;border-bottom:1px solid var(--rule)}
+  .teach-table td{border:0;padding:1px 0}
+  .teach-table td.n{text-align:left}
+  .teach-table td.n::after{content:" students"}
+  .teach-table td.trole{color:var(--soft)}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#about">Skip to content</a>
+
+<header class="topbar" id="topbar">
+  <div class="wrap">
+    <a class="mark" href="#home">Zipeng (Cooper) Guo</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#teaching">Teaching</a>
+      <a href="#practice">Practice</a>
+      <a href="#contact">Contact</a>
+      <a class="cv" href="assets/Zipeng_Guo_CV.pdf" target="_blank" rel="noopener">CV</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- HERO: real Austin streets in a tilted view (assets/austin-map.webp, drawn from Census TIGER/Line),
+     with arcs from visitors' home block groups to ten Austin parks (aggregated smartphone mobility data). -->
+<section class="hero" id="home" aria-label="Introduction">
+  <picture>
+    <source srcset="assets/austin-map-dark.webp" media="(prefers-color-scheme: dark)">
+    <img class="hero-map" id="heroMap" src="assets/austin-map.webp" alt="" width="2600" height="1500" aria-hidden="true">
+  </picture>
+  <canvas id="flows" aria-hidden="true"></canvas>
+  <div class="legend-wrap">
+    <aside class="legend" aria-label="How to read the map">
+      <p class="lg-title">How to read the map</p>
+      <ul class="keys">
+        <li><svg class="plate-icon" width="28" height="16" viewBox="0 0 28 16" aria-hidden="true"><path class="wall" d="M3 13 9 5h16l-6 8z" fill="#CDD4DD"/><path class="top" d="M3 10.5 9 2.5h16l-6 8z" fill="#FBFCFD" stroke="#6F7C8E"/></svg>City of Austin</li>
+        <li><svg width="28" height="16" viewBox="0 0 28 16" aria-hidden="true"><circle cx="9" cy="8" r="5" fill="#E3A008" stroke="#fff" stroke-width="1.5"/><circle cx="20" cy="9" r="4" fill="#2F7FD8" stroke="#fff" stroke-width="1.5"/></svg>Park</li>
+        <li><svg width="28" height="16" viewBox="0 0 28 16" aria-hidden="true"><defs><linearGradient id="lgArc" x1="0" x2="1"><stop offset="0" stop-color="#3B4A63" stop-opacity=".35"/><stop offset="1" stop-color="#D6409F"/></linearGradient></defs><circle cx="3" cy="14" r="1.8" fill="#3B4A63"/><path d="M3 14Q12-4 25 13" stroke="url(#lgArc)" stroke-width="1.6" fill="none"/><circle cx="25" cy="13" r="2.4" fill="#D6409F"/></svg>Trip from home to park</li>
+      </ul>
+      <p>Hover a park to see where its visitors live.</p>
+      <p class="count"><b id="tripCount">0</b>trips shown so far</p>
+      <p class="fine">Data: Advan mobility data, U.S. Census TIGER/Line</p>
+    </aside>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <h1 class="name">Zipeng <span class="nick">(Cooper)</span> Guo</h1>
+      <div class="panel">
+        <div class="who">
+          <div class="avatar"><img src="assets/zipeng-guo.jpg" alt="Portrait of Zipeng (Cooper) Guo" width="720" height="900"></div>
+          <p class="role">Ph.D. student in Urban and Regional Sciences<br>Texas A&amp;M University</p>
+        </div>
+        <p class="statement">I study how people use urban parks. With smartphone mobility data, I measure who visits, how far they travel, and what those visits are worth, and I bring that evidence into park and trail design.</p>
+        <p class="market">On the 2026–27 academic job market for faculty positions in landscape architecture and planning.</p>
+        <p class="hint-inline">The map behind shows trips from home neighborhoods to Austin parks. Tap a park to see its visitors.</p>
+        <ul class="links">
+          <li><a class="primary" href="assets/Zipeng_Guo_CV.pdf" target="_blank" rel="noopener">CV (PDF)</a></li>
+          <li><a href="mailto:guo7501@tamu.edu">Email</a></li>
+          <li><a href="https://scholar.google.com/citations?user=zxL7jCMAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a></li>
+          <li><a href="https://orcid.org/0009-0006-5806-1692" target="_blank" rel="noopener">ORCID</a></li>
+          <li><a href="https://www.linkedin.com/in/zipeng-cooper-guo-011034210/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://github.com/guo7501" target="_blank" rel="noopener">GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="wrap grid">
+    <div class="sec-head"><h2>About</h2></div>
+    <div class="sec-body about-cols">
+      <div class="prose">
+        <p class="lede">I’m Zipeng Guo, though most people call me Cooper. I’m a Ph.D. student in Urban and Regional Sciences in the Department of Landscape Architecture and Urban Planning at Texas A&amp;M University, where I work with Dr. Yang Song.</p>
+        <p>My research asks how people actually use urban parks: who visits, how far they travel, how heat, trees, highways, and crime change those visits, and what the visits are worth to a city. Most of this work draws on smartphone mobility data, GIS, and machine learning.</p>
+        <p>I came to research through design. I earned a B.S. (2020) and a Master of Landscape Architecture (2022) at the University of Idaho, and was named a Landscape Architecture Foundation Olmsted Scholar in 2022. At Texas A&amp;M I co-teach the undergraduate landscape design studio and work on community parks, trails, and therapeutic gardens across Texas.</p>
+      </div>
+      <dl class="facts">
+        <dt>Research interests</dt>
+        <dd><ul>
+          <li><span class="dot" data-t="value"></span>Park visitation and recreational value</li>
+          <li><span class="dot" data-t="design"></span>Trees, heat, and park design</li>
+          <li><span class="dot" data-t="access"></span>Access and safety in public space</li>
+          <li><span class="dot" data-t="site"></span>GIS and LiDAR for site design</li>
+        </ul></dd>
+        <dt>Education</dt>
+        <dd><ul class="edu">
+          <li><span class="deg">Ph.D., Urban and Regional Sciences</span><span class="where">Texas A&amp;M University, 2023–present</span></li>
+          <li><span class="deg">Master of Landscape Architecture</span><span class="where">University of Idaho, 2022</span></li>
+          <li><span class="deg">B.S., Landscape Architecture</span><span class="where">University of Idaho, 2020</span></li>
+        </ul></dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED -->
+<section class="featured" id="featured" aria-labelledby="featured-title">
+  <figure>
+    <img src="assets/park-value-network.jpg" alt="Figure from the recreational value study: a network of park visits drawn from smartphone mobility data, with parks shown as colored circles." width="1512" height="822" loading="lazy" decoding="async">
+  </figure>
+  <div class="wrap grid">
+    <p class="kicker">Latest article, 2026</p>
+    <h2 id="featured-title">Quantifying the recreational value of urban parks using smartphone mobility data</h2>
+    <div class="f-body">
+      <p>Most parks are free to enter, so the value they deliver rarely shows up on a balance sheet. This study applies the zonal travel cost method to smartphone mobility data for parks in Austin, Texas: it traces where visitors come from and how far they travel, and turns those trips into an estimate of each park’s recreational value.</p>
+      <p class="cite"><b>Guo, Z.</b>, Song, Y., Lu, H., Zhu, R., Zhang, Y., Yoon, H., &amp; Zhang, B. <i>Computational Urban Science</i>, 6, Article 23.</p>
+      <a class="btn-light" href="https://doi.org/10.1007/s43762-026-00257-6" target="_blank" rel="noopener">Read the article</a>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section class="section" id="research">
+  <div class="wrap grid">
+    <div class="sec-head"><h2>Research</h2></div>
+    <div class="sec-body">
+      <p class="lede">Parks are among the few public goods that people choose to use. My work treats those choices, recorded at scale by smartphones, as evidence for how parks should be valued, designed, and made reachable.</p>
+      <ol class="themes">
+        <li class="theme" data-t="value">
+          <div>
+            <h3><span class="dot"></span>The recreational value of urban parks</h3>
+            <p>Because most parks are free, their benefits are hard to price. I adapt the travel cost method to smartphone mobility data, using where visitors come from and how far they travel to estimate what individual parks are worth.</p>
+            <ul class="related">
+              <li><a href="https://doi.org/10.1007/s43762-026-00257-6" target="_blank" rel="noopener">Computational Urban Science, 2026</a></li>
+              <li>ACSP 2024, CELA 2025, and AGU 2025 presentations</li>
+            </ul>
+          </div>
+          <figure class="plate clear"><img src="assets/rv-workflow.png" alt="Illustration of the research workflow: city mobility records are collected, cleaned, analyzed, and turned into planning decisions." width="1800" height="968" loading="lazy" decoding="async"></figure>
+        </li>
+        <li class="theme" data-t="design">
+          <div>
+            <h3><span class="dot"></span>Trees, heat, and park design</h3>
+            <p>Which design choices bring people to a park, and which keep them away? I combine tree structure, land surface temperature, and park features with visit records, using explainable machine learning to see how canopy, heat, and amenities shape when people come and how long they stay.</p>
+            <ul class="related">
+              <li><a href="https://doi.org/10.1016/j.ufug.2025.128706" target="_blank" rel="noopener">Urban Forestry &amp; Urban Greening, 2025</a> (visit duration)</li>
+              <li><a href="https://doi.org/10.1016/j.uclim.2025.102444" target="_blank" rel="noopener">Urban Climate, 2025</a> (heat and pocket parks)</li>
+              <li><a href="https://doi.org/10.3390/urbansci8020059" target="_blank" rel="noopener">Urban Science, 2024</a> (seasonal hourly visits, Dallas)</li>
+              <li>ACSP 2026: tree design and visitation; tree structure and land surface temperature</li>
+            </ul>
+          </div>
+          <figure class="plate" data-seed="11" data-colors="green" aria-hidden="true"></figure>
+        </li>
+        <li class="theme" data-t="access">
+          <div>
+            <h3><span class="dot"></span>Access, barriers, and safety</h3>
+            <p>A park nearby is not the same as a park people can reach. With fixed-effects and spatial models, my coauthors and I study how highways, crime, and segregation change who visits urban parks in Austin.</p>
+            <ul class="related">
+              <li><a href="https://doi.org/10.3390/urbansci9120512" target="_blank" rel="noopener">Urban Science, 2025</a> (highways as barriers)</li>
+              <li><a href="https://doi.org/10.1016/j.ufug.2025.129218" target="_blank" rel="noopener">Urban Forestry &amp; Urban Greening, 2025</a> (crime and visitation)</li>
+              <li><a href="https://doi.org/10.3390/urbansci9090359" target="_blank" rel="noopener">Urban Science, 2025</a> (crime and urban places)</li>
+              <li>ACSP 2025: segregation and park visitation</li>
+            </ul>
+          </div>
+          <figure class="plate" data-seed="23" data-colors="coral" data-barrier="1" aria-hidden="true"></figure>
+        </li>
+        <li class="theme" data-t="site">
+          <div>
+            <h3><span class="dot"></span>From analysis to site design</h3>
+            <p>I bring the same data into design: LiDAR terrain models for trail alignment, cost and feasibility tools for small Texas communities, and studies of how green infrastructure and stormwater practices perform.</p>
+            <ul class="related">
+              <li><a href="https://doi.org/10.3390/land15020224" target="_blank" rel="noopener">Land, 2026</a> (green infrastructure and recovery after Hurricane Laura)</li>
+              <li><a href="https://doi.org/10.3390/buildings12050629" target="_blank" rel="noopener">Buildings, 2022</a> (courtyard wind environment)</li>
+              <li>CELA 2022: stormwater learning typologies for Portland Public Schools</li>
+              <li><a href="#practice">Harrison County trail design</a></li>
+            </ul>
+          </div>
+          <figure class="plate" data-seed="37" data-colors="blue" aria-hidden="true"></figure>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS (dot color = research theme) -->
+<section class="section" id="publications">
+  <div class="wrap grid">
+    <div class="sec-head"><h2>Publications</h2></div>
+    <div class="sec-body">
+      <ul class="theme-key" aria-label="Color key">
+        <li><span class="dot" data-t="value"></span>Recreational value</li>
+        <li><span class="dot" data-t="design"></span>Trees, heat, and design</li>
+        <li><span class="dot" data-t="access"></span>Access and safety</li>
+        <li><span class="dot" data-t="site"></span>Site design and environment</li>
+      </ul>
+      <div class="tabs" role="tablist" aria-label="Publication type">
+        <button class="tab" role="tab" id="tab-j" aria-selected="true" aria-controls="panel-j">Journal articles (9)</button>
+        <button class="tab" role="tab" id="tab-c" aria-selected="false" aria-controls="panel-c" tabindex="-1">Conference presentations (11)</button>
+      </div>
+
+      <div id="panel-j" role="tabpanel" aria-labelledby="tab-j">
+        <div class="year-group"><div class="year">2026</div><ol class="refs">
+          <li data-t="value"><span class="me">Guo, Z.</span>, Song, Y., Lu, H., Zhu, R., Zhang, Y., Yoon, H., &amp; Zhang, B. Quantifying the recreational value of urban parks using smartphone mobility data. <span class="src">Computational Urban Science</span>, 6, Article 23. <a href="https://doi.org/10.1007/s43762-026-00257-6" target="_blank" rel="noopener">doi:10.1007/s43762-026-00257-6</a></li>
+          <li data-t="site">Tao, Z., Wang, J., Gu, Y., Deal, B., <span class="me">Guo, Z.</span>, &amp; Song, Y. Green infrastructure and post-disaster economic recovery: Empirical evidence from Hurricane Laura. <span class="src">Land</span>, 15(2), Article 224. <a href="https://doi.org/10.3390/land15020224" target="_blank" rel="noopener">doi:10.3390/land15020224</a></li>
+        </ol></div>
+        <div class="year-group"><div class="year">2025</div><ol class="refs">
+          <li data-t="access">Yoon, H., <span class="me">Guo, Z.</span>, Song, Y., Lu, H., &amp; Zhang, Y. Highway as barriers to park visitation: A fixed effects analysis using mobility data. <span class="src">Urban Science</span>, 9(12), 512. <a href="https://doi.org/10.3390/urbansci9120512" target="_blank" rel="noopener">doi:10.3390/urbansci9120512</a></li>
+          <li data-t="access">Zhang, Y., <span class="me">Guo, Z.</span>, Song, Y., &amp; Lu, H. The impact of crime on urban park visitation patterns: A longitudinal analysis in Austin, Texas. <span class="src">Urban Forestry &amp; Urban Greening</span>. <a href="https://doi.org/10.1016/j.ufug.2025.129218" target="_blank" rel="noopener">doi:10.1016/j.ufug.2025.129218</a></li>
+          <li data-t="access">Wang, W., Song, Y., Kong, J., <span class="me">Guo, Z.</span>, Zhang, Y., Zhu, Z., &amp; Hu, S. Exploring the spatial relationship between crime and urban places in Austin: A geographically weighted regression approach. <span class="src">Urban Science</span>, 9(9), 359. <a href="https://doi.org/10.3390/urbansci9090359" target="_blank" rel="noopener">doi:10.3390/urbansci9090359</a></li>
+          <li data-t="design">Liu, P., <span class="me">Guo, Z.</span>, Song, Y., &amp; Fernandez, J. Vulnerable groups in severe heat: A study assessing the impacts of climate and pocket park visitations pre-post the pandemic. <span class="src">Urban Climate</span>, 61, 102444. <a href="https://doi.org/10.1016/j.uclim.2025.102444" target="_blank" rel="noopener">doi:10.1016/j.uclim.2025.102444</a></li>
+          <li data-t="design">Zhao, R., Song, Y., Guo, S., <span class="me">Guo, Z.</span>, &amp; Shen, X. Unraveling the relationships between urban park characteristics and visit durations: A longitudinal smartphone behavior survey in Austin. <span class="src">Urban Forestry &amp; Urban Greening</span>, 105, 128706. <a href="https://doi.org/10.1016/j.ufug.2025.128706" target="_blank" rel="noopener">doi:10.1016/j.ufug.2025.128706</a></li>
+        </ol></div>
+        <div class="year-group"><div class="year">2024</div><ol class="refs">
+          <li data-t="design">Song, Y., <span class="me">Guo, Z.</span>, Yang, R., &amp; Wang, N. Utilizing mobility data to investigate seasonal hourly visiting behavior for downtown parks in Dallas. <span class="src">Urban Science</span>, 8(2), 59. <a href="https://doi.org/10.3390/urbansci8020059" target="_blank" rel="noopener">doi:10.3390/urbansci8020059</a></li>
+        </ol></div>
+        <div class="year-group"><div class="year">2022</div><ol class="refs">
+          <li data-t="site">Guo, P., Ding, C., <span class="me">Guo, Z.</span>, Liu, T., &amp; Lyu, T. Coupling CFD simulation and field experiments in summer to prove Feng Shui optimizes courtyard wind environments: A case study of Prince Kung’s Mansion in Beijing. <span class="src">Buildings</span>, 12(5), 629. <a href="https://doi.org/10.3390/buildings12050629" target="_blank" rel="noopener">doi:10.3390/buildings12050629</a></li>
+        </ol></div>
+      </div>
+
+      <div id="panel-c" role="tabpanel" aria-labelledby="tab-c" hidden>
+        <div class="year-group"><div class="year">2026</div><ol class="refs">
+          <li data-t="design"><span class="me">Guo, Z.</span>, Jeong, J., Yoon, H., Song, Y., &amp; Zhang, B. Does tree design matter for park visitation? Evidence from mobility data and explainable machine learning. <span class="src">ACSP Annual Conference</span>, Pittsburgh, PA. <span class="kind">Paper</span></li>
+          <li data-t="design">Jeong, J., Yoon, H., &amp; <span class="me">Guo, Z.</span> How tree structure, composition, and configuration influence summer land surface temperature in neighborhood parks. <span class="src">ACSP Annual Conference</span>, Pittsburgh, PA. <span class="kind">Paper</span></li>
+        </ol></div>
+        <div class="year-group"><div class="year">2025</div><ol class="refs">
+          <li data-t="value"><span class="me">Guo, Z.</span>, Song, Y., Zhang, Y., Yoon, H., &amp; Hao, Y. Using smartphone mobility data to measure recreational value of urban parks: A case study in Austin, Texas. <span class="src">AGU Annual Meeting</span>, New Orleans, LA. <span class="kind">Poster</span></li>
+          <li data-t="value"><span class="me">Guo, Z.</span>, Song, Y., Zhang, Y., &amp; Lu, H. Quantifying the economic benefits of urban parks using the travel cost method: A data-driven study in Austin, TX. <span class="src">CELA Annual Conference</span>, Portland, OR. <span class="kind">Paper</span> <a href="https://virtual.oxfordabstracts.com/event/73664/submission/31" target="_blank" rel="noopener">Abstract</a></li>
+          <li data-t="access">Yoon, H., <span class="me">Guo, Z.</span>, Song, Y., Lu, H., &amp; Zhang, Y. Urban segregation and park visitation: A longitudinal and place-based study in Austin, Texas. <span class="src">ACSP Annual Conference</span>, Minneapolis, MN. <span class="kind">Paper</span></li>
+          <li data-t="access">Zhang, Y., Song, Y., <span class="me">Guo, Z.</span>, &amp; Lu, H. The impact of crime on urban park visitation patterns: A longitudinal analysis in Austin, Texas. <span class="src">ACSP Annual Conference</span>, Minneapolis, MN. <span class="kind">Paper</span></li>
+          <li data-t="access">Rezaeimalek, S., Fernandez, J., Song, Y., &amp; <span class="me">Guo, Z.</span> Determining the combined influence of park characteristics and socio-economic factors on community park visitation patterns in Atlanta, GA. <span class="src">CELA Annual Conference</span>, Portland, OR. <span class="kind">Paper</span> <a href="https://virtual.oxfordabstracts.com/event/73664/submission/325" target="_blank" rel="noopener">Abstract</a></li>
+        </ol></div>
+        <div class="year-group"><div class="year">2024</div><ol class="refs">
+          <li data-t="value"><span class="me">Guo, Z.</span>, &amp; Song, Y. Assessing the economic value of urban parks with mobility data in Austin, TX. <span class="src">ACSP Annual Conference</span>, Seattle, WA. <span class="kind">Paper</span></li>
+          <li data-t="design">Zhao, R., Song, Y., Guo, S., &amp; <span class="me">Guo, Z.</span> Park features influencing visit durations: A longitudinal survey in Austin. <span class="src">ACSP Annual Conference</span>, Seattle, WA. <span class="kind">Paper</span></li>
+          <li data-t="design"><span class="me">Guo, Z.</span>, Song, Y., &amp; Hao, Y. Utilizing big data to validate the influence of elevated temperatures on the visiting behavior of varied demographic categories in Dallas. <span class="src">CELA Annual Conference</span>, St. Louis, MO. <span class="kind">Paper</span></li>
+        </ol></div>
+        <div class="year-group"><div class="year">2022</div><ol class="refs">
+          <li data-t="site"><span class="me">Guo, Z.</span>, Cronan, D., &amp; Elkin, D. Stormwater learning typologies: Best management practices for Portland Public Schools. <span class="src">CELA Annual Conference</span>, New Mexico. <span class="kind">Paper</span> <a href="https://thecela.org/wp-content/uploads/2022-CELA-Proceedings.pdf" target="_blank" rel="noopener">Proceedings</a></li>
+        </ol></div>
+      </div>
+
+      <p class="scholar-line">Citations and the latest list are on <a href="https://scholar.google.com/citations?user=zxL7jCMAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TEACHING -->
+<section class="section" id="teaching">
+  <div class="wrap grid">
+    <div class="sec-head"><h2>Teaching</h2></div>
+    <div class="sec-body">
+      <p class="lede">I teach design by starting from how people actually use a place.</p>
+      <div class="prose">
+        <p>In the LAND 212 studio, students observe behavior on site, map what they see, and turn it into plazas, pocket parks, and community parks, including a 2026 community project for Harrison County, Texas. I pair hand drawing and physical models with GIS and LiDAR so that students can test an idea against the ground it sits on.</p>
+        <p class="muted">Since 2021 I have taught or helped teach nine studios and courses, reaching about 180 students, and given guest lectures on GIS for landscape design.</p>
+      </div>
+      <table class="teach-table">
+        <thead><tr><th scope="col">Term</th><th scope="col">Course</th><th scope="col">Role</th><th scope="col" class="n">Students</th></tr></thead>
+        <tbody>
+          <tr><td>Spring 2026</td><td><span class="course">LAND 212 Landscape Design II</span><span class="inst">Texas A&amp;M University, undergraduate studio</span></td><td class="trole">Co-instructor</td><td class="n">39</td></tr>
+          <tr><td>Spring 2026</td><td><span class="course">URPN 325 GIS in Urban Planning</span><span class="inst">Texas A&amp;M University</span></td><td class="trole">Guest lecturer</td><td class="n">17</td></tr>
+          <tr><td>Fall 2025</td><td><span class="course">LAND 601 Landscape Design Studio</span><span class="inst">Texas A&amp;M University, graduate studio</span></td><td class="trole">Teaching assistant</td><td class="n">6</td></tr>
+          <tr><td>Spring 2025</td><td><span class="course">LAND 212 Landscape Design II</span><span class="inst">Texas A&amp;M University, undergraduate studio</span></td><td class="trole">Co-instructor</td><td class="n">43</td></tr>
+          <tr><td>Fall 2024</td><td><span class="course">LAND 601 Landscape Design Fundamentals</span><span class="inst">Texas A&amp;M University, graduate studio</span></td><td class="trole">Studio teaching</td><td class="n">5</td></tr>
+          <tr><td>Spring 2024</td><td><span class="course">LAND 212 Landscape Design II</span><span class="inst">Texas A&amp;M University, undergraduate studio</span></td><td class="trole">Co-instructor</td><td class="n">38</td></tr>
+          <tr><td>Fall 2023</td><td><span class="course">URPN 220 Digital Communication</span><span class="inst">Texas A&amp;M University</span></td><td class="trole">Teaching assistant</td><td class="n">19</td></tr>
+          <tr><td>Fall 2023</td><td><span class="course">LAND 601 Landscape Architecture Design Theory and Application</span><span class="inst">Texas A&amp;M University</span></td><td class="trole">Co-teaching</td><td class="n">12</td></tr>
+          <tr><td>2022</td><td><span class="course">LARC 380 Water Conservation Technologies</span><span class="inst">University of Idaho</span></td><td class="trole">Lecturer</td><td class="n">8</td></tr>
+          <tr><td>2021</td><td><span class="course">LARC 210 Landscape Architecture Representation and Media</span><span class="inst">University of Idaho</span></td><td class="trole">Teaching assistant</td><td class="n">16</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- PRACTICE: each .plate shows a generated visit map until an <img> is placed inside it -->
+<section class="section" id="practice">
+  <div class="wrap grid">
+    <div class="sec-head"><h2>Practice</h2></div>
+    <div class="sec-body">
+      <p class="lede">Design and planning work with small towns, hospitals, schools, and county park departments across Texas.</p>
+      <div class="projects">
+        <article class="project">
+          <figure class="plate" data-seed="4" aria-hidden="true"></figure>
+          <h3>Harrison County Trail Design</h3>
+          <p class="meta"><span>Harrison County, Texas</span><span>2026</span></p>
+          <p>A multi-use trail system designed from site survey and LiDAR terrain data, with three trail types for different kinds of recreation, CAD plans, parking layouts, and construction cost estimates. With Texas A&amp;M AgriLife.</p>
+        </article>
+        <article class="project">
+          <figure class="plate" data-seed="9" aria-hidden="true"></figure>
+          <h3>Alto Landscape Design</h3>
+          <p class="meta"><span>Alto, Texas</span><span>2026</span></p>
+          <p>Site and landscape proposals for the City of Alto, including circulation, parking, and cost estimates prepared to support funding applications.</p>
+        </article>
+        <article class="project">
+          <figure class="plate" data-seed="15" aria-hidden="true"></figure>
+          <h3>Landscape Design Feasibility Tool</h3>
+          <p class="meta"><span>Texas communities</span><span>2026</span></p>
+          <p>Cost tables, budgeting worksheets, and lifecycle planning tools that help small communities price trails, parking, signage, planting, and lighting.</p>
+        </article>
+        <article class="project">
+          <figure class="plate" data-seed="27" aria-hidden="true"></figure>
+          <h3>Neal Cancer Center Therapeutic Garden</h3>
+          <p class="meta"><span>Houston Methodist, Houston</span><span>2025</span></p>
+          <p>A rooftop garden for patients and staff, designed around sensory engagement, biophilic design, and quiet, passive use.</p>
+        </article>
+        <article class="project">
+          <figure class="plate" data-seed="31" aria-hidden="true"></figure>
+          <h3>Charlotte Sharp Children’s Center Garden</h3>
+          <p class="meta"><span>College Station, Texas</span><span>2025</span></p>
+          <p>A nature-based garden for early childhood education, designed to universal-access and play-safety standards (ASTM F1487, CPSC).</p>
+        </article>
+        <article class="project">
+          <figure class="plate" data-seed="44" aria-hidden="true"></figure>
+          <h3>Precinct 4 Parks Master Plan</h3>
+          <p class="meta"><span>Montgomery County, Texas</span><span>2025</span></p>
+          <p>Park inventory, recreation-standard analysis, and concept plans for nine parks covering more than 160 acres.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS + SERVICE -->
+<section class="section" id="recognition">
+  <div class="wrap grid">
+    <div class="sec-head"><h2>Awards and service</h2></div>
+    <div class="sec-body two">
+      <div>
+        <h3>Awards</h3>
+        <ul class="ledger">
+          <li><span class="y">2026</span><span>Jesus Hinojosa Endowed Urban Planning Scholarship<span class="lvl">Texas A&amp;M University</span></span></li>
+          <li><span class="y">2025</span><span>GIS Day Graduate Poster, 1st place<span class="lvl">Texas A&amp;M University</span></span></li>
+          <li><span class="y">2024</span><span>Texas ASLA Student Design Award<span class="lvl">State</span></span></li>
+          <li><span class="y">2024</span><span>Graduate Student Small Research Grant<span class="lvl">Texas A&amp;M University</span></span></li>
+          <li><span class="y">2024</span><span>Graduate Student Research and Presentation Travel Award<span class="lvl">Texas A&amp;M University</span></span></li>
+          <li><span class="y">2022</span><span>Landscape Architecture Foundation Olmsted Scholar<span class="lvl">National</span></span></li>
+          <li><span class="y">2022</span><span>Idaho-Montana ASLA Student Merit Award<span class="lvl">State</span></span></li>
+          <li><span class="y">2022</span><span>GPSA Travel Award<span class="lvl">University of Idaho</span></span></li>
+          <li><span class="y">2021</span><span>Art and Architecture Scholarship<span class="lvl">University of Idaho</span></span></li>
+          <li><span class="y">2021</span><span>Student Achievement Award, 2020–21<span class="lvl">University of Idaho</span></span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Service</h3>
+        <ul class="ledger">
+          <li><span class="y">2026</span><span>Abstract reviewer<span class="lvl">CELA 2027 Annual Conference</span></span></li>
+          <li><span class="y">2026</span><span>Peer reviewer<span class="lvl">Environment and Planning B; Pattern Recognition; Journal of Asian Architecture and Building Engineering; Forum Geografi</span></span></li>
+          <li><span class="y">2025</span><span>LAUP Lecture Series coordinator, 2025–26<span class="lvl">Department of Landscape Architecture and Urban Planning, Texas A&amp;M</span></span></li>
+          <li><span class="y">2025</span><span>Assistant advisor, Partnership for Community Outreach<span class="lvl">Three community design projects with four MLA students</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- CONTACT -->
+<footer class="contact" id="contact">
+  <div class="wrap grid">
+    <div class="sec-head"><h2>Contact</h2></div>
+    <div class="sec-body">
+      <a class="mail" href="mailto:guo7501@tamu.edu">guo7501@tamu.edu</a>
+      <div class="contact-cols">
+        <address>Department of Landscape Architecture and Urban Planning<br>Texas A&amp;M University<br>College Station, TX 77843</address>
+        <ul class="links">
+          <li><a href="mailto:guozipeng7501@gmail.com">guozipeng7501@gmail.com</a></li>
+          <li><a href="https://scholar.google.com/citations?user=zxL7jCMAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a></li>
+          <li><a href="https://orcid.org/0009-0006-5806-1692" target="_blank" rel="noopener">ORCID</a></li>
+          <li><a href="https://www.linkedin.com/in/zipeng-cooper-guo-011034210/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://github.com/guo7501" target="_blank" rel="noopener">GitHub</a></li>
+        </ul>
+      </div>
+      <div class="foot"><span>© 2026 Zipeng (Cooper) Guo</span><span>Updated October 2026</span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ======================================================================
+   Hero: visits to Austin parks, drawn as 3D arcs over a tilted street map.
+   The street map (assets/austin-map.webp) was rendered with the same camera
+   as below, so arcs and streets line up. Arcs come from aggregated smartphone
+   mobility data: each links a home block group to a park its residents visit.
+   ====================================================================== */
+const CAM = {"W":2600,"H":1500,"lon0":-97.735,"lat0":30.3,"bearing":-18,"pitch":55,"D":62,"F":1950,"cx":0.6,"cy":0.56,"arc_k":0.22,"arc_min":0.5};
+const FLOWS = {"parks":[["James A. Garrison District Park",-97.8005,30.2122],["Bartholomew District Park",-97.6955,30.3033],["Dick Nichols District Park",-97.8598,30.2126],["Upper Bull Creek Greenbelt",-97.7934,30.417],["Brentwood Neighborhood Park",-97.7313,30.3418],["Williamson Creek East Greenbelt",-97.7569,30.1885],["Barton Creek Wilderness Park",-97.8263,30.2579],["Lower Bull Creek Greenbelt",-97.7735,30.3801],["Quail Creek Neighborhood Park",-97.7009,30.3692],["Blunn Creek Nature Preserve",-97.748,30.233]],"arcs":[[0,-97.8251,30.1779,1.0],[0,-97.8509,30.2039,0.91],[0,-97.7946,30.1948,0.8],[0,-97.7377,30.286,0.79],[0,-97.7318,30.1786,0.64],[0,-97.7711,30.1993,0.64],[0,-97.8141,30.1927,0.59],[1,-97.6115,30.2333,1.0],[1,-97.6679,30.3151,0.86],[1,-97.6801,30.3097,0.81],[1,-97.6894,30.3645,0.64],[1,-97.6347,30.3022,0.59],[1,-97.6693,30.3354,0.55],[1,-97.6269,30.3191,0.54],[2,-97.881,30.206,1.0],[2,-97.9038,30.196,0.64],[2,-97.8833,30.2204,0.6],[2,-97.9324,30.212,0.54],[2,-97.8845,30.1635,0.51],[2,-97.8875,30.2558,0.44],[2,-97.8384,30.2126,0.37],[3,-97.7747,30.451,1.0],[3,-97.7796,30.4069,0.84],[3,-97.8096,30.4335,0.82],[3,-97.8324,30.4203,0.63],[3,-97.7836,30.4331,0.6],[3,-97.8043,30.3968,0.35],[3,-97.7549,30.4928,0.25],[4,-97.7278,30.3018,1.0],[4,-97.7368,30.3614,0.93],[4,-97.7679,30.3476,0.9],[4,-97.7377,30.2861,0.9],[4,-97.7527,30.3135,0.86],[4,-97.726,30.3577,0.82],[4,-97.7502,30.3277,0.73],[5,-97.7478,30.1427,1.0],[5,-97.6563,30.1597,0.34],[5,-97.7382,30.2007,0.31],[5,-97.7211,30.2011,0.31],[5,-97.8008,30.2205,0.29],[5,-97.7028,30.2312,0.29],[5,-97.7333,30.243,0.29],[6,-97.844,30.261,1.0],[6,-97.8374,30.2787,0.56],[6,-97.8452,30.2848,0.27],[6,-97.8509,30.2039,0.23],[6,-97.7701,30.219,0.23],[6,-97.8071,30.3185,0.23],[6,-97.8875,30.2558,0.21],[7,-97.7921,30.3738,1.0],[7,-97.7796,30.4069,0.29],[7,-97.7632,30.3931,0.18],[7,-97.8324,30.4203,0.15],[7,-97.766,30.3652,0.14],[7,-97.8846,30.3638,0.12],[7,-97.7743,30.419,0.12],[8,-97.6806,30.357,1.0],[8,-97.7194,30.3729,0.97],[8,-97.6881,30.3488,0.95],[8,-97.6269,30.3191,0.91],[8,-97.6982,30.3491,0.85],[8,-97.7043,30.3456,0.77],[8,-97.6952,30.3544,0.57],[9,-97.7684,30.2374,1.0],[9,-97.7267,30.2337,0.92],[9,-97.7469,30.2085,0.43],[9,-97.7478,30.1427,0.4],[9,-97.7761,30.235,0.39],[9,-97.7492,30.1967,0.33],[9,-97.7549,30.1917,0.32]]};
+const PARK_COLORS = ['#E3A008', '#E5484D', '#D6409F', '#2F7FD8', '#2E9E5B', '#8E4EC6', '#F06D1F', '#12A594', '#3E63DD', '#C026D3'];
+const PAL = ['#F2C230', '#EF5B5B', '#F49AC1', '#4C8DD6', '#43B36A', '#B98BD6'];
+const CYAN = '#38B2C3';
+const THEME = { green: '#43B36A', coral: '#EF5B5B', blue: '#4C8DD6', yellow: '#F2C230' };
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function rng(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function ease(u) { return u < .5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2; }
+
+/* Camera: local km plane, rotate by bearing, tilt by pitch, perspective divide. */
+const PROJ = (() => {
+  const kx = 111.32 * Math.cos(CAM.lat0 * Math.PI / 180), ky = 110.57;
+  const th = CAM.bearing * Math.PI / 180, ph = CAM.pitch * Math.PI / 180;
+  const ct = Math.cos(th), st = Math.sin(th), cp = Math.cos(ph), sp = Math.sin(ph);
+  return {
+    kx, ky,
+    at(lon, lat, z = 0) {
+      const X = (lon - CAM.lon0) * kx, Y = (lat - CAM.lat0) * ky;
+      const xr = X * ct + Y * st, yr = -X * st + Y * ct;
+      const d = yr * sp - z * cp + CAM.D;
+      return [CAM.cx * CAM.W + CAM.F * xr / d, CAM.cy * CAM.H - CAM.F * (yr * cp + z * sp) / d];
+    }
+  };
+})();
+
+/* ---------- Hero ---------- */
+(() => {
+  const hero = document.getElementById('home'), img = document.getElementById('heroMap');
+  const cv = document.getElementById('flows'), x = cv.getContext('2d');
+  let Wh = 0, Hh = 0, s = 1, ox = 0, oy = 0, hover = null, visible = true, trips = 0;
+  const darkMQ = matchMedia('(prefers-color-scheme: dark)');
+  const palette = () => darkMQ.matches
+    ? { home: '#A9B4C6', arcFrom: 'rgba(169,180,198,0.28)', ring: '#121821', pill: 'rgba(24,32,45,.96)', pillLine: 'rgba(229,233,241,.16)', pillText: '#E5E9F1' }
+    : { home: '#3B4A63', arcFrom: 'rgba(59,74,99,0.35)', ring: '#ffffff', pill: 'rgba(255,255,255,.96)', pillLine: 'rgba(21,33,59,.12)', pillText: '#15213B' };
+  let C = palette();
+  darkMQ.addEventListener('change', () => { C = palette(); draw(0); });
+  const tripEl = document.getElementById('tripCount');
+  setInterval(() => { tripEl.textContent = trips.toLocaleString(); }, 250);
+
+  const parks = FLOWS.parks.map(([name, lon, lat], i) => ({ name, color: PARK_COLORS[i % PARK_COLORS.length], g: PROJ.at(lon, lat), pulse: 0, lon, lat }));
+  const arcs = FLOWS.arcs.map(([pi, lon, lat, w]) => {
+    const pk = parks[pi];
+    const L = Math.hypot((pk.lon - lon) * PROJ.kx, (pk.lat - lat) * PROJ.ky);
+    const h = CAM.arc_k * L + CAM.arc_min, g = [];
+    for (let i = 0; i <= 36; i++) { const t = i / 36; g.push(PROJ.at(lon + (pk.lon - lon) * t, lat + (pk.lat - lat) * t, h * 4 * t * (1 - t))); }
+    return { pk, w, g, o: g[0], t: -Math.random() * 7, dur: 2.4 + L * 0.16 + Math.random() * 0.8 };
+  });
+  const S = ([a, b]) => [ox + a * s, oy + b * s];
+
+  function layout() {
+    const r = hero.getBoundingClientRect();
+    Wh = r.width; Hh = r.height;
+    const narrow = Wh < 860;
+    s = narrow ? Math.max(Wh / CAM.W * 3.3, 0.5) : Math.max(Wh / CAM.W, Hh / CAM.H) * 1.04;
+    const f = PROJ.at(-97.752, 30.300);
+    ox = Math.min(0, Math.max(Wh - CAM.W * s, (narrow ? 0.5 : 0.66) * Wh - f[0] * s));
+    // on phones the card covers the lower half, so the map may end above the bottom edge
+    oy = narrow ? Math.min(0, 0.24 * Hh - f[1] * s) : Math.min(0, Math.max(Hh - CAM.H * s, 0.55 * Hh - f[1] * s));
+    hero.classList.toggle('map-short', oy + CAM.H * s < Hh);
+    Object.assign(img.style, { inset: 'auto', left: ox + 'px', top: oy + 'px', width: CAM.W * s + 'px', height: CAM.H * s + 'px', objectFit: 'fill', maxWidth: 'none' });
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    cv.width = Math.round(Wh * dpr); cv.height = Math.round(Hh * dpr);
+    x.setTransform(dpr, 0, 0, dpr, 0, 0);
+    for (const p of parks) p.s = S(p.g);
+    for (const a of arcs) { a.s = a.g.map(S); a.os = a.s[0]; }
+  }
+
+  function poly(pts, i0, i1) {
+    x.beginPath(); x.moveTo(pts[i0][0], pts[i0][1]);
+    for (let i = i0 + 1; i <= i1; i++) x.lineTo(pts[i][0], pts[i][1]);
+  }
+  function at(pts, e) { // point at fraction e along the polyline
+    const f = e * (pts.length - 1), i = Math.min(pts.length - 2, Math.floor(f)), u = f - i;
+    return [pts[i][0] + (pts[i + 1][0] - pts[i][0]) * u, pts[i][1] + (pts[i + 1][1] - pts[i][1]) * u];
+  }
+
+  function draw(dt) {
+    x.clearRect(0, 0, Wh, Hh);
+    const k = Math.max(0.75, Math.min(1.15, s / 0.6)); // line weights follow the map scale
+    x.lineCap = 'round'; x.lineJoin = 'round';
+
+    // home neighborhoods
+    for (const a of arcs) {
+      const lit = hover && a.pk === hover, dim = hover && !lit;
+      x.globalAlpha = dim ? 0.15 : lit ? 0.9 : 0.5;
+      x.fillStyle = lit ? a.pk.color : C.home;
+      x.beginPath(); x.arc(a.os[0], a.os[1], (lit ? 2.6 : 1.8) * k, 0, 7); x.fill();
+    }
+    // arcs
+    for (const a of arcs) {
+      const lit = hover && a.pk === hover, dim = hover && !lit;
+      const gr = x.createLinearGradient(a.os[0], a.os[1], a.pk.s[0], a.pk.s[1]);
+      gr.addColorStop(0, C.arcFrom); gr.addColorStop(1, a.pk.color);
+      x.strokeStyle = gr;
+      x.globalAlpha = dim ? 0.08 : lit ? 0.95 : 0.42 + 0.25 * a.w;
+      x.lineWidth = (lit ? 2.2 : 1 + 0.6 * a.w) * k;
+      poly(a.s, 0, a.s.length - 1); x.stroke();
+    }
+    // travelling visitors
+    if (!reduceMotion) for (const a of arcs) {
+      a.t += dt / 1000;
+      if (a.t < 0) continue;
+      const u = a.t / a.dur;
+      if (u >= 1) { a.pk.pulse = 1; trips++; a.t = -(0.6 + Math.random() * 3.2); continue; }
+      if (hover && a.pk !== hover) continue;
+      const e = ease(u), tail = 0.2, N = 8;
+      for (let j = 0; j < N; j++) {
+        const e0 = Math.max(0, e - tail + tail * j / N), e1 = Math.max(0, e - tail + tail * (j + 1) / N);
+        const p0 = at(a.s, e0), p1 = at(a.s, e1);
+        x.globalAlpha = (j + 1) / N; x.strokeStyle = a.pk.color; x.lineWidth = 2.4 * k;
+        x.beginPath(); x.moveTo(p0[0], p0[1]); x.lineTo(p1[0], p1[1]); x.stroke();
+      }
+      const hd = at(a.s, e);
+      x.globalAlpha = 1; x.fillStyle = a.pk.color;
+      x.beginPath(); x.arc(hd[0], hd[1], 2.6 * k, 0, 7); x.fill();
+    }
+    // parks
+    for (const p of parks) {
+      const dim = hover && hover !== p, [px, py] = p.s, sq = Math.cos(CAM.pitch * Math.PI / 180);
+      if (p.pulse > 0) {
+        x.globalAlpha = p.pulse * (dim ? 0.2 : 0.7); x.strokeStyle = p.color; x.lineWidth = 1.5;
+        const R = (8 + (1 - p.pulse) * 22) * k;
+        x.beginPath(); x.ellipse(px, py, R, R * sq, 0, 0, 7); x.stroke();
+        p.pulse = Math.max(0, p.pulse - dt / 900);
+      }
+      x.globalAlpha = dim ? 0.3 : 1;
+      x.fillStyle = p.color; x.strokeStyle = C.ring; x.lineWidth = 2;
+      x.beginPath(); x.ellipse(px, py, 6.5 * k, 6.5 * k * sq + 1.5, 0, 0, 7); x.fill(); x.stroke();
+    }
+    x.globalAlpha = 1;
+    if (hover) {
+      const [px, py] = hover.s, txt = hover.name;
+      x.font = '600 13px Archivo, system-ui, sans-serif';
+      const tw = x.measureText(txt).width, bw = tw + 30, bh = 26;
+      const bx = Math.max(8, Math.min(Wh - bw - 8, px - bw / 2)), by = py - bh - 16;
+      x.fillStyle = C.pill; x.strokeStyle = C.pillLine; x.lineWidth = 1;
+      x.beginPath(); if (x.roundRect) x.roundRect(bx, by, bw, bh, 13); else x.rect(bx, by, bw, bh); x.fill(); x.stroke();
+      x.fillStyle = hover.color; x.beginPath(); x.arc(bx + 13, by + bh / 2, 4, 0, 7); x.fill();
+      x.fillStyle = C.pillText; x.textBaseline = 'middle'; x.fillText(txt, bx + 22, by + bh / 2 + 0.5);
+    }
+  }
+
+  function parkAt(cx, cy) {
+    let best = null, bd = 26;
+    for (const p of parks) { const d = Math.hypot(p.s[0] - cx, p.s[1] - cy); if (d < bd) { bd = d; best = p; } }
+    return best;
+  }
+  function setHover(h) { if (h !== hover) { hover = h; hero.style.cursor = h ? 'pointer' : ''; if (reduceMotion) draw(0); } }
+  hero.addEventListener('pointermove', e => {
+    if (e.pointerType === 'touch') return;
+    const r = hero.getBoundingClientRect();
+    setHover(e.target.closest('.panel, .legend') ? null : parkAt(e.clientX - r.left, e.clientY - r.top));
+  });
+  hero.addEventListener('pointerleave', () => setHover(null));
+  hero.addEventListener('click', e => {
+    if (e.target.closest('.panel, .legend, a, button')) return;
+    const r = hero.getBoundingClientRect(), p = parkAt(e.clientX - r.left, e.clientY - r.top);
+    setHover(p && p !== hover ? p : null);
+  });
+
+  layout(); draw(0);
+  if (!reduceMotion) {
+    let last = 0;
+    const frame = now => { requestAnimationFrame(frame); const dt = Math.min(50, now - (last || now)); last = now; if (visible) draw(dt); };
+    requestAnimationFrame(frame);
+  }
+  new IntersectionObserver(es => { visible = es[0].isIntersecting; }).observe(hero);
+  document.addEventListener('visibilitychange', () => { visible = !document.hidden; });
+  let rt, lastW = innerWidth;
+  addEventListener('resize', () => {
+    if (innerWidth === lastW) return; // ignore mobile toolbar height changes
+    lastW = innerWidth; clearTimeout(rt); rt = setTimeout(() => { layout(); draw(0); }, 120);
+  });
+})();
+
+/* Light street grid, a river, and a highway for the placeholder plates. */
+function drawCity(x, W, H, s, r, opt = {}) {
+  const a = -0.38, L = Math.hypot(W, H), sp = 44 * s;
+  x.save(); x.translate(W / 2, H / 2); x.rotate(a);
+  let k = 0;
+  for (let p = -L / 2; p <= L / 2; p += sp, k++) {
+    const art = k % 5 === 0;
+    x.strokeStyle = art ? 'rgba(120,132,152,.22)' : 'rgba(120,132,152,.1)';
+    x.lineWidth = art ? 1.5 : 1;
+    x.beginPath(); x.moveTo(p, -L / 2); x.lineTo(p, L / 2); x.stroke();
+    x.beginPath(); x.moveTo(-L / 2, p); x.lineTo(L / 2, p); x.stroke();
+  }
+  x.restore();
+  x.lineCap = 'round';
+  const o = r() * 0.2;
+  x.strokeStyle = 'rgba(76,141,214,.22)'; x.lineWidth = 9 * s;
+  x.beginPath(); x.moveTo(0, H * (0.55 + o)); x.bezierCurveTo(W * .25, H * (0.42 + o), W * .45, H * (0.78 + o / 2), W * .66, H * (0.58 + o / 2));
+  x.bezierCurveTo(W * .82, H * .45, W * .9, H * .55, W, H * .4); x.stroke();
+  x.strokeStyle = opt.barrier ? 'rgba(229,72,77,.6)' : 'rgba(120,132,152,.28)'; x.lineWidth = opt.barrier ? 3.2 : 3;
+  x.beginPath(); x.moveTo(W * (0.56 + o / 3), 0); x.bezierCurveTo(W * .6, H * .35, W * .5, H * .7, W * .55, H); x.stroke();
+}
+
+/* ---------- Plates: a still visit map stands in until an image is added ---------- */
+function drawPlates() {
+  document.querySelectorAll('.plate[data-seed]').forEach(fig => {
+    if (fig.querySelector('img')) return;
+    let c = fig.querySelector('canvas');
+    if (!c) { c = document.createElement('canvas'); fig.appendChild(c); }
+    const b = fig.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2);
+    if (!b.width) return;
+    const W = b.width, H = b.height, r = rng(+fig.dataset.seed), s = Math.max(0.5, W / 900);
+    c.width = Math.round(W * dpr); c.height = Math.round(H * dpr);
+    const x = c.getContext('2d'); x.setTransform(dpr, 0, 0, dpr, 0, 0); x.clearRect(0, 0, W, H);
+    drawCity(x, W, H, s, r, { barrier: fig.dataset.barrier });
+    const main = THEME[fig.dataset.colors];
+    const ps = [];
+    for (let i = 0; i < 5; i++) ps.push({ x: W * (0.1 + 0.8 * r()), y: H * (0.12 + 0.76 * r()), w: 0.2 + 0.8 * Math.pow(r(), 1.5), c: main && i < 3 ? main : PAL[Math.floor(r() * PAL.length)] });
+    x.lineCap = 'round';
+    for (let i = 0; i < 90; i++) {
+      const hx = W * r(), hy = H * r();
+      let sum = 0; const ws = ps.map(p => { const v = p.w / Math.pow(Math.hypot(p.x - hx, p.y - hy) + 30, 1.6); sum += v; return v; });
+      let q = r() * sum, p = ps[0]; for (let k = 0; k < ps.length; k++) { q -= ws[k]; if (q <= 0) { p = ps[k]; break; } }
+      const dx = p.x - hx, dy = p.y - hy, d = Math.hypot(dx, dy) || 1, bend = (0.12 + 0.25 * r()) * d * (r() < .5 ? -1 : 1);
+      x.strokeStyle = r() < 0.7 ? p.c : CYAN; x.globalAlpha = 0.55; x.lineWidth = 1.1;
+      x.beginPath(); x.moveTo(hx, hy); x.quadraticCurveTo((hx + p.x) / 2 - dy / d * bend, (hy + p.y) / 2 + dx / d * bend, p.x, p.y); x.stroke();
+      x.globalAlpha = 0.7; x.fillStyle = '#3B4A63'; x.beginPath(); x.arc(hx, hy, 1.3, 0, 7); x.fill();
+    }
+    for (const p of ps) {
+      x.globalAlpha = 0.92; x.fillStyle = p.c; x.beginPath(); x.arc(p.x, p.y, (5 + 22 * p.w) * s, 0, 7); x.fill();
+      x.globalAlpha = 0.45; x.strokeStyle = '#fff'; x.lineWidth = 1; x.stroke();
+    }
+    x.globalAlpha = 1;
+  });
+}
+drawPlates();
+let pt; addEventListener('resize', () => { clearTimeout(pt); pt = setTimeout(drawPlates, 150); });
+
+/* ---------- Top bar, menu, section highlight ---------- */
+(() => {
+  const bar = document.getElementById('topbar'), hero = document.getElementById('home');
+  const onScroll = () => bar.classList.toggle('solid', window.scrollY > hero.offsetHeight - 80);
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  const btn = document.getElementById('menuBtn'), nav = document.getElementById('nav');
+  btn.addEventListener('click', () => { const open = nav.classList.toggle('open'); btn.setAttribute('aria-expanded', open); btn.textContent = open ? 'Close' : 'Menu'; });
+  nav.addEventListener('click', e => { if (e.target.tagName === 'A' && nav.classList.contains('open')) btn.click(); });
+
+  const links = [...nav.querySelectorAll('a[href^="#"]')];
+  const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) { links.forEach(a => a.removeAttribute('aria-current')); const a = map.get(e.target.id); if (a) a.setAttribute('aria-current', 'true'); } });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  ['about', 'research', 'publications', 'teaching', 'practice', 'contact'].forEach(id => io.observe(document.getElementById(id)));
+})();
+
+/* ---------- Publication tabs ---------- */
+(() => {
+  const tabs = [...document.querySelectorAll('.tab')];
+  function select(tab) {
+    tabs.forEach(t => { const on = t === tab; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; document.getElementById(t.getAttribute('aria-controls')).hidden = !on; });
+    tab.focus();
+  }
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => select(t));
+    t.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); select(tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length]); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
