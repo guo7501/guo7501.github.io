@@ -15,7 +15,10 @@ Everything is in `index.html`. Publications, teaching, and projects are ordinary
 - The arcs are drawn live from the `FLOWS` data near the top of the script in `index.html` (ten parks and their top home block groups, from aggregated Advan mobility data). The `CAM` values must match the map image, so change them only together with a re-rendered map.
 
 ## Teaching Portfolio
-The Teaching Portfolio button (`id="portfolioLink"`) opens `assets/Zipeng_Guo_Teaching_Portfolio.pdf`. To link somewhere else, open `index.html`, search for `portfolioLink`, and change its `href`.
+The Teaching Portfolio button (`id="portfolioLink"`) opens `assets/Zipeng_Guo_Teaching_Portfolio.pdf`. The same file is linked twice in the Teaching section: the dark button under the three numbers (`.tport-top`) and the card after the courses (`.tport-card`). To link somewhere else, search `index.html` for `Zipeng_Guo_Teaching_Portfolio.pdf` and change every `href`.
+
+## Email button
+The Email button in the hero opens a small panel (`id="mailpanel"`) with the school and personal addresses, each with a Copy button. To change an address, edit both the text in `.mp-v` and the `data-copy` value of the button next to it. The panel is moved to the end of the page when it opens, so nothing on the page can cover it.
 
 ## Featuring
 The steps 1–5 are written onto the workflow image (`assets/featuring-workflow.jpg`). Each step is one `<li class="fs">` in `.fsteps`; its `left`, `top`, and `width` place it under the image's own stage labels, so keep them if you only change the words. On narrow screens the steps move below the image and numbered pins (`.fpin`) mark the stages.

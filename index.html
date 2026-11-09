@@ -242,7 +242,7 @@ h3{margin:0 0 10px;font-stretch:112%;font-weight:600;font-size:22px;line-height:
 .teaching .glance li + li{border-left:1px solid var(--rule)}
 .teaching .glance b{display:block;font-stretch:125%;font-weight:600;font-size:clamp(40px,4.6vw,58px);line-height:1;letter-spacing:-.02em}
 .teaching .glance span{display:block;margin-top:8px;font-size:14px;color:var(--soft)}
-.teaching .glance-note{text-align:center;font-size:13px;color:var(--soft);margin:18px 0 72px}
+.teaching .glance-note{text-align:center;font-size:13px;color:var(--soft);margin:18px 0 28px}
 .teaching .tsub{font-size:24px;font-stretch:110%;margin:0 0 22px}
 .teaching .tsub.center{text-align:center}
 .teaching .tphil{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,56px);align-items:center;margin:0 0 84px}
@@ -582,6 +582,54 @@ h3{margin:0 0 10px;font-stretch:112%;font-weight:600;font-size:22px;line-height:
   .trec .tn::after{content:" students";color:var(--soft);font-size:13px}
   .cgrp li{flex-direction:column;gap:0}
 }
+
+/* Hero email button: a small panel to copy either address */
+.mailwrap{position:relative}
+.hero .links .mailbtn{display:inline-flex;align-items:center;gap:6px;font:inherit;cursor:pointer;padding:9px 16px 9px 18px;border-radius:999px;border:1.5px solid var(--ink);color:var(--ink);font-weight:560;
+  background:color-mix(in srgb,var(--map) 70%,transparent)}
+.hero .links .mailbtn:hover,.hero .links .mailbtn[aria-expanded="true"]{background:var(--ink);color:var(--paper)}
+.mailbtn svg{transition:transform .2s}
+.mailbtn[aria-expanded="true"] svg{transform:rotate(180deg)}
+.mailpanel{position:fixed;z-index:1000;top:0;left:0;width:max-content;max-width:calc(100vw - 32px);padding:14px 14px 10px;border-radius:16px;
+  background:var(--fsurf,#fff);color:var(--ink);box-shadow:0 0 0 1px var(--rule),0 24px 48px -20px rgba(21,33,59,.45)}
+.mailpanel[hidden]{display:none}
+.mp-h{margin:0 4px 8px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--soft)}
+.mp-row{display:grid;grid-template-columns:68px 1fr auto;align-items:center;gap:10px;padding:8px 4px;border-top:1px solid var(--rule)}
+.mp-k{font-size:13px;color:var(--soft)}
+.mp-v{font-size:15px;font-weight:500;user-select:all;-webkit-user-select:all;white-space:nowrap}
+.mp-copy{font:inherit;font-size:13.5px;font-weight:560;cursor:pointer;padding:5px 14px;border-radius:999px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);min-width:74px}
+.mp-copy:hover{background:var(--ink);color:var(--paper)}
+.mp-copy.done{background:#2E9E5B;border-color:#2E9E5B;color:#fff}
+.mp-status{margin:2px 4px 0;min-height:16px;font-size:12px;color:var(--soft);width:0;min-width:calc(100% - 8px)}
+@media (max-width:520px){
+  .hero .links .mailbtn{padding:8px 13px 8px 15px;font-size:14.5px}
+  .mp-row{grid-template-columns:1fr auto;row-gap:2px}
+  .mp-k{grid-column:1 / -1}
+  .mp-v{font-size:14.5px}
+}
+
+/* Teaching Portfolio button, at the start and the end of Teaching */
+.tport{text-align:center}
+.tport-top{margin:0 0 72px}
+.tport-end{margin:48px 0 0}
+.tport a{display:inline-flex;align-items:center;gap:9px;text-decoration:none;background:var(--ink);color:var(--paper);border:1.5px solid var(--ink);
+  border-radius:999px;padding:11px 22px 11px 18px;font-weight:600;font-size:15.5px;box-shadow:0 14px 30px -18px rgba(21,33,59,.55);transition:transform .15s,box-shadow .15s}
+.tport a:hover{transform:translateY(-1px);box-shadow:0 18px 34px -16px rgba(21,33,59,.6)}
+.tport a em{font-style:normal;font-size:11.5px;font-weight:650;letter-spacing:.06em;padding:2px 7px;border-radius:6px;background:color-mix(in srgb,var(--paper) 18%,transparent)}
+.tport p{margin:10px 0 0;font-size:13px;color:var(--soft)}
+/* end of Teaching: a card that says where the course details are */
+.tport-card{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:22px;max-width:1080px;margin:48px auto 0;padding:24px 28px;
+  border-radius:18px;background:var(--fsurf,#fff);border:1.5px dashed color-mix(in srgb,var(--ink) 28%,transparent)}
+.tpc-ico{display:grid;place-items:center;width:56px;height:56px;border-radius:16px;color:var(--ink);background:color-mix(in srgb,#2F7FD8 13%,transparent)}
+.tpc-k{margin:0 0 4px;font-size:12px;font-weight:650;letter-spacing:.08em;text-transform:uppercase;color:#2F7FD8}
+.tpc-txt h3{margin:0 0 4px;font-size:19px;font-stretch:106%;line-height:1.3}
+.tpc-txt p:last-child{margin:0;font-size:14.5px;color:var(--soft);line-height:1.45}
+.tpc-btn{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;text-decoration:none;color:var(--ink);border:1.5px solid var(--ink);border-radius:999px;padding:10px 18px;font-weight:600;font-size:15px}
+.tpc-btn em{font-style:normal;font-size:11px;font-weight:650;letter-spacing:.06em;padding:2px 6px;border-radius:6px;background:color-mix(in srgb,var(--ink) 9%,transparent)}
+.tpc-btn:hover{background:var(--ink);color:var(--paper)}
+.tpc-btn:hover em{background:color-mix(in srgb,var(--paper) 18%,transparent)}
+@media (max-width:720px){.tport-card{grid-template-columns:auto 1fr;padding:20px}.tpc-btn{grid-column:1 / -1;justify-self:start}}
+@media (max-width:420px){.tport-card{grid-template-columns:1fr}.tpc-ico{width:46px;height:46px}}
 </style>
 </head>
 <body>
@@ -642,7 +690,15 @@ h3{margin:0 0 10px;font-stretch:112%;font-weight:600;font-size:22px;line-height:
         <li><a class="solid" href="assets/Zipeng_Guo_CV.pdf" target="_blank" rel="noopener">CV</a></li>
         <li><a id="portfolioLink" href="assets/Zipeng_Guo_Teaching_Portfolio.pdf" target="_blank" rel="noopener">Teaching Portfolio</a></li>
         <li><a href="https://scholar.google.com/citations?user=zxL7jCMAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a></li>
-        <li><a href="mailto:guo7501@tamu.edu">Email</a></li>
+        <li class="mailwrap">
+          <button class="mailbtn" type="button" aria-expanded="false" aria-controls="mailpanel">Email<svg viewBox="0 0 12 12" width="11" height="11" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="mailpanel" id="mailpanel" hidden>
+            <p class="mp-h">Copy an email address</p>
+            <div class="mp-row"><span class="mp-k">School</span><span class="mp-v">guo7501@tamu.edu</span><button type="button" class="mp-copy" data-copy="guo7501@tamu.edu" aria-label="Copy school email guo7501@tamu.edu">Copy</button></div>
+            <div class="mp-row"><span class="mp-k">Personal</span><span class="mp-v">guozipeng7501@gmail.com</span><button type="button" class="mp-copy" data-copy="guozipeng7501@gmail.com" aria-label="Copy personal email guozipeng7501@gmail.com">Copy</button></div>
+            <p class="mp-status" role="status" aria-live="polite"></p>
+          </div>
+        </li>
         <li><a href="https://www.linkedin.com/in/zipeng-cooper-guo-011034210/" target="_blank" rel="noopener">LinkedIn</a></li>
       </ul>
       <p class="map-caption">The map behind shows visits from home neighborhoods to Austin parks: dots are parks, flowing lines show visitation. Tap a park to see its visitors. Data: Advan mobility data, U.S. Census TIGER/Line.</p>
@@ -721,6 +777,7 @@ h3{margin:0 0 10px;font-stretch:112%;font-weight:600;font-size:22px;line-height:
     <p class="intro">I combine new technologies for landscape analysis with people-centered environmental design.</p>
     <ul class="glance" aria-label="Teaching at a glance"><li><b>9</b><span>courses and studios</span></li><li><b>212</b><span>students</span></li><li><b>8</b><span>terms since 2021</span></li></ul>
     <p class="glance-note">Texas A&amp;M University and University of Idaho. Guest lectures not counted.</p>
+    <div class="tport tport-top"><a href="assets/Zipeng_Guo_Teaching_Portfolio.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" width="17" height="17" aria-hidden="true"><path d="M5 2.5h6.5L15.5 6.5V17a.5.5 0 0 1-.5.5H5a.5.5 0 0 1-.5-.5V3a.5.5 0 0 1 .5-.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M11.5 2.5v4h4M7.5 10.5h5M7.5 13.5h5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>View the Teaching Portfolio</span><em>PDF</em></a><p>Course pages, student work, and student evaluations</p></div>
     <div class="tphil">
       <div>
         <h3 class="tsub">How I teach</h3>
@@ -753,7 +810,7 @@ h3{margin:0 0 10px;font-stretch:112%;font-weight:600;font-size:22px;line-height:
         <table class="trec"><thead><tr><th scope="col">Course</th><th scope="col">Term</th><th scope="col">Role</th><th scope="col" class="tn">Students</th></tr></thead><tbody><tr class="rg"><th colspan="4" scope="rowgroup">Graduate (MLA)</th></tr><tr><th scope="row"><b>LAND 601</b><span>Landscape Architectural Design Foundations</span></th><td class="tt">Fall 2025</td><td><span class="rl co">Co-instructor</span></td><td class="tn">6</td></tr><tr><th scope="row"><b>LAND 601</b><span>Landscape Architecture Design Fundamentals</span></th><td class="tt">Fall 2024</td><td><span class="rl ta">Teaching assistant</span></td><td class="tn">5</td></tr><tr><th scope="row"><b>LAND 601</b><span>Landscape Architectural Design Theory</span></th><td class="tt">Fall 2023</td><td><span class="rl ta">Teaching assistant</span></td><td class="tn">12</td></tr></tbody><tbody><tr class="rg"><th colspan="4" scope="rowgroup">Undergraduate</th></tr><tr><th scope="row"><b>LAND 212</b><span>Landscape Design II (BLA)</span></th><td class="tt">Spring 2026</td><td><span class="rl co">Co-instructor</span></td><td class="tn">39</td></tr><tr><th scope="row"><b>LAND 212</b><span>Landscape Design II (BLA)</span></th><td class="tt">Spring 2025</td><td><span class="rl co">Co-instructor</span></td><td class="tn">43</td></tr><tr><th scope="row"><b>LAND 212</b><span>Landscape Design II (BLA)</span></th><td class="tt">Spring 2024</td><td><span class="rl co">Co-instructor</span></td><td class="tn">38</td></tr><tr><th scope="row"><b>URPN 325</b><span>Introduction to GIS in Urban Planning</span></th><td class="tt">Spring 2026</td><td><span class="rl gl">Guest lecturer</span></td><td class="tn">17</td></tr><tr><th scope="row"><b>URPN 220</b><span>Digital Communication I</span></th><td class="tt">Fall 2023</td><td><span class="rl ta">Teaching assistant</span></td><td class="tn">45</td></tr><tr><th scope="row"><b>LARC 380</b><span>Water Conservation Technologies (Idaho)</span></th><td class="tt">Spring 2022</td><td><span class="rl co">Co-instructor</span></td><td class="tn">8</td></tr><tr><th scope="row"><b>LARC 210</b><span>Representation and Media (Idaho)</span></th><td class="tt">Spring 2021</td><td><span class="rl co">Co-instructor</span></td><td class="tn">16</td></tr></tbody><tbody><tr class="rg"><th colspan="4" scope="rowgroup">Mentoring</th></tr><tr><th scope="row"><b>PCO</b><span>Partnership for Community Outreach internships</span></th><td class="tt">Summer 2025</td><td><span class="rl ad">Assistant advisor</span></td><td class="tn">4</td></tr></tbody></table>
       </div>
     </div>
-    <p class="tcol-note">Course pages, student work, and evaluations are in my <a href="assets/Zipeng_Guo_Teaching_Portfolio.pdf" target="_blank" rel="noopener">Teaching Portfolio (PDF)</a>.</p>
+    <aside class="tport-card" aria-label="Teaching Portfolio"><span class="tpc-ico"><svg viewBox="0 0 20 20" width="26" height="26" aria-hidden="true"><path d="M5 2.5h6.5L15.5 6.5V17a.5.5 0 0 1-.5.5H5a.5.5 0 0 1-.5-.5V3a.5.5 0 0 1 .5-.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M11.5 2.5v4h4M7.5 10.5h5M7.5 13.5h5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span><div class="tpc-txt"><p class="tpc-k">Course details</p><h3>The details of every course are in my Teaching Portfolio</h3><p>Course pages with the projects, student work, and student evaluations for each course listed above.</p></div><a class="tpc-btn" href="assets/Zipeng_Guo_Teaching_Portfolio.pdf" target="_blank" rel="noopener">Open the portfolio <em>PDF</em><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 12 12 4M6 4h6v6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a></aside>
   </div>
 </section>
 
@@ -1154,6 +1211,52 @@ const PROJ = (() => {
   };
   dots.forEach((d, k) => { d.addEventListener('click', () => go(k)); d.querySelector('i').addEventListener('animationend', () => go(cur + 1)); });
   box.querySelector('.tstage').addEventListener('click', () => go(cur + 1));
+})();
+
+// Hero email button: open the panel, copy either address
+(() => {
+  const btn = document.querySelector('.mailbtn'), panel = document.getElementById('mailpanel');
+  if (!btn || !panel) return;
+  const status = panel.querySelector('.mp-status');
+  document.body.appendChild(panel);           // top layer: nothing in the page can cover or cut it
+  const place = () => {                       // under the button, or above it when there is no room below
+    const b = btn.getBoundingClientRect(), r = panel.getBoundingClientRect();
+    let top = b.bottom + 8;
+    if (top + r.height > innerHeight - 8 && b.top - 8 - r.height >= 8) top = b.top - 8 - r.height;
+    const left = Math.max(12, Math.min(b.left, innerWidth - 12 - r.width));
+    panel.style.top = top + 'px'; panel.style.left = left + 'px';
+  };
+  const open = on => {
+    btn.setAttribute('aria-expanded', on); panel.hidden = !on;
+    if (on) { place(); panel.querySelector('.mp-copy').focus({ preventScroll: true }); }
+  };
+  addEventListener('scroll', () => { if (!panel.hidden) place(); }, { passive: true });
+  btn.addEventListener('click', e => { e.stopPropagation(); open(panel.hidden); });
+  document.addEventListener('click', e => { if (!panel.hidden && !panel.contains(e.target) && !btn.contains(e.target)) open(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !panel.hidden) { open(false); btn.focus(); } });
+  addEventListener('resize', () => { if (!panel.hidden) place(); });
+  const copy = async text => {
+    try { await navigator.clipboard.writeText(text); return true; } catch (_) {}
+    try {                                     // older browsers
+      const t = document.createElement('textarea');
+      t.value = text; t.setAttribute('readonly', ''); t.style.cssText = 'position:fixed;opacity:0';
+      document.body.appendChild(t); t.select(); const ok = document.execCommand('copy'); t.remove(); return ok;
+    } catch (_) { return false; }
+  };
+  panel.querySelectorAll('.mp-copy').forEach(b => b.addEventListener('click', async e => {
+    e.stopPropagation();
+    const ok = await copy(b.dataset.copy);
+    panel.querySelectorAll('.mp-copy').forEach(x => { x.classList.remove('done'); x.textContent = 'Copy'; });
+    if (ok) {
+      b.classList.add('done'); b.textContent = 'Copied';
+      status.textContent = 'Copied. Paste it into your email.';
+      clearTimeout(b._t); b._t = setTimeout(() => { b.classList.remove('done'); b.textContent = 'Copy'; }, 2200);
+    } else {
+      const s = getSelection(), r = document.createRange();
+      r.selectNodeContents(b.previousElementSibling); s.removeAllRanges(); s.addRange(r);
+      status.textContent = 'Press Ctrl+C (or ⌘C) to copy the selected address.';
+    }
+  }));
 })();
 </script>
 </body>
