@@ -163,7 +163,7 @@ h3{margin:0 0 10px;font-stretch:112%;font-weight:600;font-size:22px;line-height:
 .feature{background:var(--paper)}
 .center{text-align:center}
 .fcard{--surface:var(--fsurf,#fff);background:var(--surface);border-radius:20px;padding:clamp(24px,3.6vw,44px);box-shadow:0 28px 60px -40px rgba(21,33,59,.4)}
-.fhead{margin:0 0 30px}
+.fhead{margin:0 0 26px}
 .fbottom{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.8fr);gap:clamp(24px,3.4vw,44px);align-items:center;margin-top:34px;padding-top:34px;border-top:1px solid var(--rule)}
 .fres-t{margin:0 0 18px;font-size:15px;line-height:1.55;color:var(--soft);max-width:26em}
 .fres-h{margin:0 0 10px;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
@@ -433,6 +433,12 @@ h3{margin:0 0 10px;font-stretch:112%;font-weight:600;font-size:22px;line-height:
 .case .dimg.contain img{object-fit:contain}
 .dtexts{display:grid}
 .dtext h4{margin:0 0 10px;font-size:22px;font-stretch:108%;line-height:1.22}
+.clinks{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0}
+.clinks a{display:inline-block;text-decoration:none;white-space:nowrap;padding:8px 16px;border-radius:999px;border:1.5px solid var(--ink);color:var(--ink);font-size:14px;font-weight:560}
+.clinks a.solid,.clinks a:hover{background:var(--ink);color:var(--paper)}
+.dtext .dlink{display:block;width:fit-content;margin-top:12px;color:var(--ink);font-weight:560;text-underline-offset:3px}
+.dtext .dlink::after{content:" \2197";font-weight:400}
+
 .dtext p{margin:0;font-size:16px;line-height:1.6;color:var(--soft)}
 .dnav{display:flex;align-items:center;gap:14px;margin-top:26px}
 .dnav button{width:42px;height:42px;border-radius:50%;border:1.5px solid var(--ink);background:none;color:var(--ink);display:grid;place-items:center;cursor:pointer;transition:background .2s,color .2s,opacity .2s}
@@ -510,6 +516,72 @@ h3{margin:0 0 10px;font-stretch:112%;font-weight:600;font-size:22px;line-height:
   .research .cnt span{display:block}
   .research .cnt .sep{display:none}
 }
+
+/* Featuring: steps 1-5 written onto the workflow image, under its own stage labels */
+.fplate{margin:0;container:fplate / inline-size}
+.fart{position:relative;aspect-ratio:1586/1265;background:#fff;border-radius:14px;overflow:hidden;
+  --ink:#15213B;--soft:#5A6680;color:#15213B;box-shadow:0 0 0 1px var(--rule)}
+.fpic{position:absolute;inset:0 0 auto 0;display:block;cursor:zoom-in}
+.fpic img{display:block;width:100%;height:auto}
+.fsteps{list-style:none;margin:0;padding:0}
+.fs{position:absolute;margin:0}
+.fs h4{display:flex;align-items:center;gap:.5em;margin:0 0 .35em;font-size:1.55cqw;font-stretch:105%;line-height:1.2;color:#15213B}
+.fs .fn{flex:none;width:1.75em;height:1.75em;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font-size:.8em;font-weight:650}
+.fs p{margin:0 0 .45em;font-size:1.32cqw;line-height:1.42;color:#15213B}
+.fs .ftag{display:inline-block;font-size:1.12cqw;line-height:1.35;color:var(--c);font-weight:560;filter:brightness(.82)}
+.fpin{position:absolute;display:none;transform:translate(-50%,-50%);width:22px;height:22px;border-radius:50%;background:var(--c);color:#fff;
+  font-size:12px;font-weight:650;place-items:center;box-shadow:0 0 0 2.5px #fff,0 2px 6px rgba(21,33,59,.3)}
+.fplate figcaption{font-size:12px;color:var(--soft);text-align:right;padding:6px 4px 0}
+/* narrow: the image with numbered pins, then the steps as a list */
+@container fplate (max-width: 860px){
+  .fart{aspect-ratio:auto;overflow:visible;background:none;box-shadow:none}
+  .fpic{position:relative;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 0 0 1px var(--rule)}
+  .fpins{position:absolute;inset:0 0 auto 0;aspect-ratio:1586/992;pointer-events:none}
+  .fpin{display:grid}
+  .fsteps{margin-top:22px;display:grid;gap:18px;color:var(--ink)}
+  .fs{position:static;width:auto!important;display:grid;grid-template-columns:30px 1fr;column-gap:12px}
+  .fs h4{grid-column:1 / -1;font-size:17px;color:var(--ink)}
+  .fs .fn{width:30px;height:30px;font-size:14px}
+  .fs p,.fs .ftag{grid-column:2}
+  .fs p{font-size:15px;color:var(--ink)}
+  .fs .ftag{font-size:13px;filter:none}
+}
+
+/* Teaching: courses I can teach (left) and the teaching record (right) */
+.tcols{display:grid;grid-template-columns:minmax(0,.94fr) minmax(0,1.2fr);gap:clamp(28px,4vw,64px);max-width:1080px;margin:0 auto;align-items:start}
+.tcol{background:var(--fsurf,#fff);border-radius:18px;padding:clamp(20px,2.6vw,32px);box-shadow:0 22px 50px -38px rgba(21,33,59,.4)}
+.tcol-h{margin:0 0 4px;font-size:19px;font-stretch:108%}
+.tcol-sub{margin:0 0 18px;font-size:13.5px;color:var(--soft)}
+.cgrp + .cgrp{margin-top:18px}
+.cg-h{display:flex;justify-content:space-between;gap:12px;margin:0 0 4px;padding-bottom:6px;border-bottom:1.5px solid var(--ink);font-size:12.5px;font-weight:650;letter-spacing:.07em;text-transform:uppercase}
+.cg-h em,.cgrp li em{font-style:normal;font-weight:500;letter-spacing:0;text-transform:none;color:var(--soft);font-size:13px;white-space:nowrap}
+.cgrp ul{list-style:none;margin:0;padding:0}
+.cgrp li{display:flex;justify-content:space-between;gap:14px;padding:7px 0;border-bottom:1px solid var(--rule);font-size:15px;line-height:1.35}
+.cgrp li:last-child{border-bottom:0}
+.trec{width:100%;border-collapse:collapse;font-size:14.5px;line-height:1.35}
+.trec thead th{text-align:left;font-size:12.5px;font-weight:600;color:var(--soft);padding:0 8px 8px 0;border-bottom:1.5px solid var(--ink)}
+.trec .rg th{text-align:left;padding:16px 0 4px;font-size:12.5px;font-weight:650;letter-spacing:.07em;text-transform:uppercase;border-bottom:1px solid var(--rule)}
+.trec tbody:first-of-type .rg th{padding-top:12px}
+.trec td,.trec tbody th{padding:8px 8px 8px 0;border-bottom:1px solid var(--rule);vertical-align:top;font-weight:400;text-align:left}
+.trec tbody th b{display:block;font-weight:620;font-stretch:104%}
+.trec tbody th span{display:block;color:var(--soft);font-size:13.5px}
+.trec .tt{white-space:nowrap}
+.trec .tn{text-align:right;padding-right:0;font-variant-numeric:tabular-nums}
+.rl{display:inline-block;padding:1px 9px;border-radius:999px;font-size:12.5px;white-space:nowrap;border:1px solid var(--rule)}
+.rl.co{background:color-mix(in srgb,#2E9E5B 14%,transparent);border-color:transparent}
+.rl.ad{background:color-mix(in srgb,#12A594 14%,transparent);border-color:transparent}
+.tcol-note{text-align:center;margin:22px 0 0;font-size:14px;color:var(--soft)}
+.tcol-note a{color:var(--ink);font-weight:560}
+@media (max-width:900px){.tcols{grid-template-columns:1fr}}
+@media (max-width:520px){
+  .trec thead{display:none}
+  .trec tr:not(.rg){display:grid;grid-template-columns:auto 1fr auto;column-gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--rule)}
+  .trec tr:not(.rg) > *{border:0;padding:0}
+  .trec tbody th{grid-column:1 / -1;margin-bottom:5px}
+  .trec .tt{font-size:13.5px;color:var(--soft)}
+  .trec .tn::after{content:" students";color:var(--soft);font-size:13px}
+  .cgrp li{flex-direction:column;gap:0}
+}
 </style>
 </head>
 <body>
@@ -568,7 +640,7 @@ h3{margin:0 0 10px;font-stretch:112%;font-weight:600;font-size:22px;line-height:
       </ol>
       <ul class="links">
         <li><a class="solid" href="assets/Zipeng_Guo_CV.pdf" target="_blank" rel="noopener">CV</a></li>
-        <li><a id="portfolioLink" href="assets/Zipeng_Guo_Portfolio.pdf" target="_blank" rel="noopener">Portfolio</a></li><!-- change href to your portfolio link -->
+        <li><a id="portfolioLink" href="assets/Zipeng_Guo_Teaching_Portfolio.pdf" target="_blank" rel="noopener">Teaching Portfolio</a></li>
         <li><a href="https://scholar.google.com/citations?user=zxL7jCMAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a></li>
         <li><a href="mailto:guo7501@tamu.edu">Email</a></li>
         <li><a href="https://www.linkedin.com/in/zipeng-cooper-guo-011034210/" target="_blank" rel="noopener">LinkedIn</a></li>
@@ -587,50 +659,14 @@ h3{margin:0 0 10px;font-stretch:112%;font-weight:600;font-size:22px;line-height:
         <h3 class="ftitle" id="feat-title">From Park Visitation Data to Landscape Design and Education</h3>
         <p class="flead">How I turn evidence about how people use parks into designs, and into tools that help communities plan, build, and maintain them.</p>
       </div>
-      <ol class="flow">
-        <li style="--c:#2F7FD8">
-          <div class="node" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.3-6-10a6 6 0 1 1 12 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></svg></div>
-          <h3><span>1</span>Data</h3>
-          <p>Smartphone mobility data shows where park visitors come from, and when.</p>
-          <span class="ftag">Advan · 200+ Austin parks</span>
-        </li>
-        <li style="--c:#12A594">
-          <div class="node" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M7 20v-6"/><path d="M12 20V8"/><path d="M17 20v-9"/></svg></div>
-          <h3><span>2</span>Analysis</h3>
-          <p>Seasonal patterns, the facilities people prefer, and who visits.</p>
-          <span class="ftag">Seasons · facilities · demographics</span>
-        </li>
-        <li style="--c:#2E9E5B">
-          <div class="node" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l-5 7h3l-4 6h12l-4-6h3z"/><path d="M12 16v5"/></svg></div>
-          <h3><span>3</span>Design</h3>
-          <p>Which design choices make parks more used and more attractive.</p>
-          <span class="ftag">Trees · trails · amenities</span>
-        </li>
-        <li style="--c:#E3A008">
-          <div class="node" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h5M8 17h3"/><path d="M15 15.5l1.5 1.5 3-3"/></svg></div>
-          <h3><span>4</span>Education</h3>
-          <p>A feasibility toolkit and visual tools show what each design option costs to build and maintain.</p>
-          <span class="ftag">Cost · maintenance · visuals</span>
-        </li>
-        <li style="--c:#E5484D">
-          <div class="node" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="9" r="2.6"/><circle cx="16" cy="9" r="2.6"/><path d="M3.5 19c.6-3 2.4-4.6 4.5-4.6S11.9 16 12.5 19"/><path d="M11.5 19c.6-3 2.4-4.6 4.5-4.6s3.9 1.6 4.5 4.6"/></svg></div>
-          <h3><span>5</span>Community</h3>
-          <p>Through Texas A&amp;M AgriLife’s WOW-E program, I use these tools with rural Texas communities to plan parks and trails.</p>
-          <span class="ftag">Harrison County · Alto</span>
-        </li>
-      </ol>
-      <div class="fbottom">
-        <figure class="fimg"><a href="assets/featuring-workflow.jpg" target="_blank" rel="noopener" aria-label="Open the workflow image at full size"><img src="assets/featuring-workflow.jpg" alt="Workflow illustration in four stages: smartphone mobility data, park visitation and recreational value in Austin, LiDAR-based park and trail design in Harrison County, and a feasibility toolkit used with community members." width="1586" height="992" loading="lazy" decoding="async"></a><figcaption>Click to enlarge</figcaption></figure>
-        <div class="fres">
-          <p class="fres-h">Resources</p>
-          <p class="fres-t">Online tools from this work, used with communities to compare design options and their costs.</p>
-          <div class="fbtns">
-            <a class="solid" href="https://rural-trail-feasibility-toolbox.guo7501.chatgpt.site" target="_blank" rel="noopener">Feasibility Toolkit</a>
-            <a href="https://landscape-visualization-toolkit.guo7501.chatgpt.site/" target="_blank" rel="noopener">Visualization Toolkit</a>
-          </div>
-          <p class="fnote">Community work with Texas A&amp;M AgriLife’s <a href="https://wowe.tamu.edu/" target="_blank" rel="noopener">WOW-E program</a></p>
+      <figure class="fplate">
+        <div class="fart">
+          <a class="fpic" href="assets/featuring-workflow.jpg" target="_blank" rel="noopener" aria-label="Open the workflow image at full size"><img src="assets/featuring-workflow.jpg" alt="Workflow illustration in four stages: smartphone mobility data, park visitation and recreational value in Austin, LiDAR-based park and trail design in Harrison County, and a feasibility toolkit used with community members." width="1586" height="992" decoding="async"></a>
+          <div class="fpins" aria-hidden="true"><span class="fpin" style="--c:#2F7FD8;left:20.81%;top:22.69%">1</span><span class="fpin" style="--c:#12A594;left:47.92%;top:47.37%">2</span><span class="fpin" style="--c:#2E9E5B;left:62.11%;top:56.45%">3</span><span class="fpin" style="--c:#E3A008;left:85.25%;top:56.45%">4</span><span class="fpin" style="--c:#E5484D;left:74.72%;top:81.15%">5</span></div>
+          <ol class="fsteps"><li class="fs" style="--c:#2F7FD8;left:1.64%;top:33.36%;width:16.52%"><h4><span class="fn">1</span>Data</h4><p>Smartphone mobility data shows where park visitors come from, and when.</p><span class="ftag">Advan · 200+ Austin parks</span></li><li class="fs" style="--c:#12A594;left:18.79%;top:47.43%;width:15.76%"><h4><span class="fn">2</span>Analysis</h4><p>Seasonal patterns, the facilities people prefer, and who visits.</p><span class="ftag">Seasons · facilities · demographics</span></li><li class="fs" style="--c:#2E9E5B;left:37.20%;top:61.98%;width:20.81%"><h4><span class="fn">3</span>Design</h4><p>Which design choices make parks more used and more attractive.</p><span class="ftag">Trees · trails · amenities</span></li><li class="fs" style="--c:#E3A008;left:59.58%;top:77.31%;width:18.28%"><h4><span class="fn">4</span>Education</h4><p>A feasibility toolkit and visual tools show what each design option costs to build and maintain.</p><span class="ftag">Cost · maintenance · visuals</span></li><li class="fs" style="--c:#E5484D;left:79.57%;top:77.31%;width:18.92%"><h4><span class="fn">5</span>Community</h4><p>Through Texas A&amp;M AgriLife’s WOW-E program, I use these tools with rural Texas communities to plan parks and trails.</p><span class="ftag">Harrison County · Alto</span></li></ol>
         </div>
-      </div>
+        <figcaption>Click the image to enlarge</figcaption>
+      </figure>
     </article>
   </div>
 </section>
@@ -683,7 +719,7 @@ h3{margin:0 0 10px;font-stretch:112%;font-weight:600;font-size:22px;line-height:
   <div class="wrap">
     <h2 class="center" id="teaching-title">Teaching</h2>
     <p class="intro">I combine new technologies for landscape analysis with people-centered environmental design.</p>
-    <ul class="glance" aria-label="Teaching at a glance"><li><b>9</b><span>courses and studios</span></li><li><b>186</b><span>students</span></li><li><b>8</b><span>terms since 2021</span></li></ul>
+    <ul class="glance" aria-label="Teaching at a glance"><li><b>9</b><span>courses and studios</span></li><li><b>212</b><span>students</span></li><li><b>8</b><span>terms since 2021</span></li></ul>
     <p class="glance-note">Texas A&amp;M University and University of Idaho. Guest lectures not counted.</p>
     <div class="tphil">
       <div>
@@ -705,7 +741,19 @@ h3{margin:0 0 10px;font-stretch:112%;font-weight:600;font-size:22px;line-height:
       <p class="qnote">&hellip; marks a shortened comment; [&nbsp;] marks an added word.</p>
     </div>
     <h3 class="tsub center courses-h">Courses</h3>
-    <div class="tlist"><div class="yg"><div class="yr">2026</div><ol><li><p class="course">LAND 212 Landscape Design II</p><p class="meta"><span>Spring · Undergraduate studio</span><span class="role">Co-instructor</span><span>39 students</span></p></li><li><p class="course">URPN 325 GIS in Urban Planning</p><p class="meta"><span>Spring · Guest lecture</span><span class="role">Guest lecturer</span><span>17 students</span></p></li></ol></div><div class="yg"><div class="yr">2025</div><ol><li><p class="course">LAND 601 Landscape Design Studio</p><p class="meta"><span>Fall · Graduate studio</span><span class="role">Teaching assistant</span><span>6 students</span></p></li><li><p class="course">LAND 212 Landscape Design II</p><p class="meta"><span>Spring · Undergraduate studio</span><span class="role">Co-instructor</span><span>43 students</span></p></li></ol></div><div class="yg"><div class="yr">2024</div><ol><li><p class="course">LAND 601 Landscape Design Fundamentals</p><p class="meta"><span>Fall · Graduate studio</span><span class="role">Studio teaching</span><span>5 students</span></p></li><li><p class="course">LAND 212 Landscape Design II</p><p class="meta"><span>Spring · Undergraduate studio</span><span class="role">Co-instructor</span><span>38 students</span></p></li></ol></div><div class="yg"><div class="yr">2023</div><ol><li><p class="course">URPN 220 Digital Communication</p><p class="meta"><span>Fall · Undergraduate course</span><span class="role">Teaching assistant</span><span>19 students</span></p></li><li><p class="course">LAND 601 Landscape Architecture Design Theory and Application</p><p class="meta"><span>Fall · Graduate course</span><span class="role">Co-teaching</span><span>12 students</span></p></li></ol></div><div class="yg"><div class="yr">2022</div><ol><li><p class="course">LARC 380 Water Conservation Technologies</p><p class="meta"><span>Undergraduate course</span><span class="role">Lecturer</span><span>8 students</span><span>University of Idaho</span></p></li></ol></div><div class="yg"><div class="yr">2021</div><ol><li><p class="course">LARC 210 Landscape Architecture Representation and Media</p><p class="meta"><span>Undergraduate course</span><span class="role">Teaching assistant</span><span>16 students</span><span>University of Idaho</span></p></li></ol></div></div>
+    <div class="tcols">
+      <div class="tcol">
+        <h4 class="tcol-h">Courses I can teach</h4>
+        <p class="tcol-sub">Common titles across accredited landscape architecture programs</p>
+        <div class="cgrp"><p class="cg-h">Design studios<em>MLA · BLA</em></p><ul><li><span>Landscape Design Studio</span></li><li><span>Community Design Studio</span></li></ul></div><div class="cgrp"><p class="cg-h">Technical courses<em>MLA · BLA</em></p><ul><li><span>Site Engineering: Grading and Drainage</span></li><li><span>Landscape Construction: Materials and Details</span></li><li><span>Construction Documents and Cost Estimating</span></li><li><span>Stormwater and Water in the Landscape</span></li><li><span>Planting Design</span></li><li><span>Landscape Representation: Hand and Digital</span></li><li><span>3D Modeling, Rendering, and AI Visualization</span></li><li><span>GIS and Geodesign for Landscape Architects</span></li><li><span>Professional Practice</span></li></ul></div><div class="cgrp"><p class="cg-h">Electives and graduate seminars</p><ul><li><span>Park, Open Space, and Recreation Planning</span><em>BLA · MLA · MUP</em></li><li><span>Design for Health and Active Living</span><em>BLA · MLA</em></li><li><span>Urban Analytics and Landscape Performance</span><em>MLA · PhD</em></li><li><span>Research Methods in Landscape Architecture</span><em>MLA · PhD</em></li></ul></div><div class="cgrp"><p class="cg-h">New course ideas</p><ul><li><span>Landscape Cost and Lifecycle Planning</span><em>BLA · MLA</em></li><li><span>Park Data Lab</span><em>Graduate seminar</em></li></ul></div>
+      </div>
+      <div class="tcol">
+        <h4 class="tcol-h">Teaching record</h4>
+        <p class="tcol-sub">Texas A&amp;M University, and the University of Idaho where marked</p>
+        <table class="trec"><thead><tr><th scope="col">Course</th><th scope="col">Term</th><th scope="col">Role</th><th scope="col" class="tn">Students</th></tr></thead><tbody><tr class="rg"><th colspan="4" scope="rowgroup">Graduate (MLA)</th></tr><tr><th scope="row"><b>LAND 601</b><span>Landscape Architectural Design Foundations</span></th><td class="tt">Fall 2025</td><td><span class="rl co">Co-instructor</span></td><td class="tn">6</td></tr><tr><th scope="row"><b>LAND 601</b><span>Landscape Architecture Design Fundamentals</span></th><td class="tt">Fall 2024</td><td><span class="rl ta">Teaching assistant</span></td><td class="tn">5</td></tr><tr><th scope="row"><b>LAND 601</b><span>Landscape Architectural Design Theory</span></th><td class="tt">Fall 2023</td><td><span class="rl ta">Teaching assistant</span></td><td class="tn">12</td></tr></tbody><tbody><tr class="rg"><th colspan="4" scope="rowgroup">Undergraduate</th></tr><tr><th scope="row"><b>LAND 212</b><span>Landscape Design II (BLA)</span></th><td class="tt">Spring 2026</td><td><span class="rl co">Co-instructor</span></td><td class="tn">39</td></tr><tr><th scope="row"><b>LAND 212</b><span>Landscape Design II (BLA)</span></th><td class="tt">Spring 2025</td><td><span class="rl co">Co-instructor</span></td><td class="tn">43</td></tr><tr><th scope="row"><b>LAND 212</b><span>Landscape Design II (BLA)</span></th><td class="tt">Spring 2024</td><td><span class="rl co">Co-instructor</span></td><td class="tn">38</td></tr><tr><th scope="row"><b>URPN 325</b><span>Introduction to GIS in Urban Planning</span></th><td class="tt">Spring 2026</td><td><span class="rl gl">Guest lecturer</span></td><td class="tn">17</td></tr><tr><th scope="row"><b>URPN 220</b><span>Digital Communication I</span></th><td class="tt">Fall 2023</td><td><span class="rl ta">Teaching assistant</span></td><td class="tn">45</td></tr><tr><th scope="row"><b>LARC 380</b><span>Water Conservation Technologies (Idaho)</span></th><td class="tt">Spring 2022</td><td><span class="rl co">Co-instructor</span></td><td class="tn">8</td></tr><tr><th scope="row"><b>LARC 210</b><span>Representation and Media (Idaho)</span></th><td class="tt">Spring 2021</td><td><span class="rl co">Co-instructor</span></td><td class="tn">16</td></tr></tbody><tbody><tr class="rg"><th colspan="4" scope="rowgroup">Mentoring</th></tr><tr><th scope="row"><b>PCO</b><span>Partnership for Community Outreach internships</span></th><td class="tt">Summer 2025</td><td><span class="rl ad">Assistant advisor</span></td><td class="tn">4</td></tr></tbody></table>
+      </div>
+    </div>
+    <p class="tcol-note">Course pages, student work, and evaluations are in my <a href="assets/Zipeng_Guo_Teaching_Portfolio.pdf" target="_blank" rel="noopener">Teaching Portfolio (PDF)</a>.</p>
   </div>
 </section>
 
@@ -713,7 +761,22 @@ h3{margin:0 0 10px;font-stretch:112%;font-weight:600;font-size:22px;line-height:
 <section class="section practice" id="practice" aria-labelledby="practice-title">
   <div class="wrap">
     <h2 class="center" id="practice-title">Community Projects</h2>
-    <p class="intro">Design and planning projects completed with Texas A&amp;M student interns for a hospital, a children’s center, small towns, and county parks.</p>
+    <p class="intro">Web tools for small Texas towns, and design projects completed with Texas A&amp;M student interns for a hospital, a children’s center, small towns, and county parks.</p>
+
+    <article class="case" aria-labelledby="pdt-title">
+      <div class="case-top text-only">
+        <div>
+          <p class="eyebrow">Featured project</p>
+          <h3 class="ctitle" id="pdt-title">Park Design Toolkit</h3>
+          <p class="cmeta">Texas&nbsp;A&amp;M&nbsp;AgriLife&nbsp;Extension&nbsp;· WOW-E&nbsp;program&nbsp;· 2026–2027</p>
+          <p class="cstatus" style="--c:#2F7FD8"><i></i>Reviewed by Harrison County · public launch 2027</p>
+          <p class="csum">Two web tools that help county and city staff, and residents without design training, answer two questions about a park or trail: what could it look like, and can we afford to build it, keep it up, and rebuild it? I built both tools in 2026 with Texas prices. Harrison County staff reviewed them; next, other Texas towns test them, and they go online for local governments and residents in 2027.</p>
+          <p class="clinks"><a class="solid" href="https://rural-trail-feasibility-toolbox.guo7501.chatgpt.site" target="_blank" rel="noopener">Feasibility Toolbox</a><a href="https://landscape-visualization-toolkit.guo7501.chatgpt.site/" target="_blank" rel="noopener">Visualization Toolkit</a></p>
+        </div>
+        <dl class="facts"><div><dt>Program</dt><dd>WOW-E (Working on Wellness Environments), Texas A&amp;M AgriLife</dd></div><div><dt>PIs</dt><dd>Dr. Jamie Rae R. Walker<br>Dr. Yang Song</dd></div><div><dt>My role</dt><dd>Project lead: planned both tools and built the websites</dd></div><div><dt>For</dt><dd>County and city staff, and residents</dd></div></dl>
+      </div>
+      <div class="deck" style="--n:6" aria-roledescription="carousel" aria-label="Project, step by step"><div class="dtabs" role="tablist" aria-label="Steps"><button type="button" role="tab" id="pdt-t0" aria-controls="pdt-p0" aria-selected="true" style="--c:#2F7FD8"><b>01</b><span>Price it</span></button><button type="button" role="tab" id="pdt-t1" aria-controls="pdt-p1" aria-selected="false" tabindex="-1" style="--c:#E3A008"><b>02</b><span>Sections</span></button><button type="button" role="tab" id="pdt-t2" aria-controls="pdt-p2" aria-selected="false" tabindex="-1" style="--c:#2E9E5B"><b>03</b><span>Costs</span></button><button type="button" role="tab" id="pdt-t3" aria-controls="pdt-p3" aria-selected="false" tabindex="-1" style="--c:#12A594"><b>04</b><span>See it</span></button><button type="button" role="tab" id="pdt-t4" aria-controls="pdt-p4" aria-selected="false" tabindex="-1" style="--c:#2F7FD8"><b>05</b><span>Stages</span></button><button type="button" role="tab" id="pdt-t5" aria-controls="pdt-p5" aria-selected="false" tabindex="-1" style="--c:#E5484D"><b>06</b><span>Budgets</span></button></div><div class="dbody"><div class="dimgs"><figure class="dimg on"><a href="assets/pdt-price.webp" target="_blank" rel="noopener" aria-label="Open image at full size"><img src="assets/pdt-price.webp" alt="The Feasibility Toolbox start page on a laptop and the cost calculator on a phone" width="1800" height="1125" style="object-position:50% 50%" decoding="async"></a></figure><figure class="dimg" aria-hidden="true" inert><a href="assets/pdt-sections.webp" target="_blank" rel="noopener" aria-label="Open image at full size"><img src="assets/pdt-sections.webp" alt="Cross-sections of five trail surfaces, with layer depths, and a note on how the costs are built" width="1800" height="1125" style="object-position:50% 50%" decoding="async"></a></figure><figure class="dimg" aria-hidden="true" inert><a href="assets/pdt-costs.webp" target="_blank" rel="noopener" aria-label="Open image at full size"><img src="assets/pdt-costs.webp" alt="Bar chart of construction, maintenance, and replacement costs for eight estimates, with build and three-year ownership ranges" width="1800" height="1125" style="object-position:50% 50%" loading="lazy" decoding="async"></a></figure><figure class="dimg" aria-hidden="true" inert><a href="assets/pdt-see.webp" target="_blank" rel="noopener" aria-label="Open image at full size"><img src="assets/pdt-see.webp" alt="The Visualization Toolkit on a laptop, showing step 1 of 11, Open Google Earth" width="1800" height="1125" style="object-position:50% 50%" loading="lazy" decoding="async"></a></figure><figure class="dimg" aria-hidden="true" inert><a href="assets/pdt-stages.webp" target="_blank" rel="noopener" aria-label="Open image at full size"><img src="assets/pdt-stages.webp" alt="Three stages on a site in Alto, Texas: a labeled bubble diagram, a rendered plan, and a marked-up street photo" width="1800" height="1125" style="object-position:50% 50%" loading="lazy" decoding="async"></a></figure><figure class="dimg" aria-hidden="true" inert><a href="assets/pdt-budgets.webp" target="_blank" rel="noopener" aria-label="Open image at full size"><img src="assets/pdt-budgets.webp" alt="The same street today and with a low, medium, and high budget" width="1800" height="1125" style="object-position:50% 50%" loading="lazy" decoding="async"></a></figure></div><div class="dside"><div class="dtexts"><div class="dtext on" role="tabpanel" id="pdt-p0" aria-labelledby="pdt-t0" style="--c:#2F7FD8"><span class="cnum">01</span><h4>Tool 01: price the whole life of a trail</h4><p>The Feasibility Toolbox explains feasibility in three plain-word stages: build it, keep it usable, and plan for renewal. Its cost calculator lets a town pick a surface and an area, then compare a town crew with a contractor. <a class="dlink" href="https://rural-trail-feasibility-toolbox.guo7501.chatgpt.site" target="_blank" rel="noopener">Open the Feasibility Toolbox</a></p></div><div class="dtext" role="tabpanel" id="pdt-p1" aria-labelledby="pdt-t1" style="--c:#E3A008" aria-hidden="true" inert><span class="cnum">02</span><h4>Five standard trail sections</h4><p>Wood chips, gravel, decomposed granite, asphalt, and concrete. Each section sets the layer depths, and each layer is priced from Texas data, with July 2026 prices.</p></div><div class="dtext" role="tabpanel" id="pdt-p2" aria-labelledby="pdt-t2" style="--c:#2E9E5B" aria-hidden="true" inert><span class="cnum">03</span><h4>Where the money goes</h4><p>For a 20,000 sq ft wood-chip trail over three years, building costs $20K–$42K, but owning it costs $88K–$195K. The tool compares two plans: keep the trail up, or maintain less and rebuild.</p></div><div class="dtext" role="tabpanel" id="pdt-p3" aria-labelledby="pdt-t3" style="--c:#12A594" aria-hidden="true" inert><span class="cnum">04</span><h4>Tool 02: early visuals with free AI tools</h4><p>The Visualization Toolkit is a step-by-step guide that uses free tools (Google Earth, PowerPoint, and ChatGPT) to make early, rough visuals of a park idea. They are not final designs: residents and town staff can show what they want before they meet a design team. <a class="dlink" href="https://landscape-visualization-toolkit.guo7501.chatgpt.site/" target="_blank" rel="noopener">Open the Visualization Toolkit</a></p></div><div class="dtext" role="tabpanel" id="pdt-p4" aria-labelledby="pdt-t4" style="--c:#2F7FD8" aria-hidden="true" inert><span class="cnum">05</span><h4>Three stages, eleven steps</h4><p>Map the idea, see it as a plan, then see it at eye level. Each step has short instructions and marked-up screenshots. The demonstration site is Alto, Texas, a town my LAND 601 students also designed for.</p></div><div class="dtext" role="tabpanel" id="pdt-p5" aria-labelledby="pdt-t5" style="--c:#E5484D" aria-hidden="true" inert><span class="cnum">06</span><h4>Three budgets, one street</h4><p>One street photo and three prompts show a low, a medium, and a high budget. Each budget level can then be priced across its whole life in the Feasibility Toolbox, so the first talk with a design team starts from a shared picture and a realistic budget.</p></div></div><div class="dnav"><button type="button" class="dprev" aria-label="Previous step" disabled><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><span class="dcount" aria-live="polite"><b>01</b> / 06</span><button type="button" class="dnext" aria-label="Next step"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></div></div></div></div>
+    </article>
 
     <article class="case" aria-labelledby="cs-title">
       <div class="case-top text-only">
@@ -723,6 +786,7 @@ h3{margin:0 0 10px;font-stretch:112%;font-weight:600;font-size:22px;line-height:
           <p class="cmeta">Charlotte&nbsp;Sharp&nbsp;Children’s&nbsp;Center&nbsp;· College&nbsp;Station,&nbsp;Texas&nbsp;· Summer&nbsp;2025</p>
           <p class="cstatus" style="--c:#2E9E5B"><i></i>Partly built, June–September 2026</p>
           <p class="csum">A nature-based outdoor play space for early childhood education, designed for universal access, play safety (ASTM F1487, CPSC), and ecological sustainability. Texas A&amp;M graduate interns carried it from site survey to final design, and the center built parts of it, including the surrounding paths, from June to September 2026.</p>
+          
         </div>
         <dl class="facts"><div><dt>Program</dt><dd>Texas A&amp;M Partnership for Community Outreach</dd></div><div><dt>Faculty advisor</dt><dd>Kenneth Hurst, PhD, RLA</dd></div><div><dt>My role</dt><dd>Assistant advisor and client coordinator</dd></div><div><dt>Team</dt><dd>Four MLA student interns</dd></div></dl>
       </div>
@@ -737,6 +801,7 @@ h3{margin:0 0 10px;font-stretch:112%;font-weight:600;font-size:22px;line-height:
           <p class="cmeta">Houston&nbsp;Methodist&nbsp;Hospital&nbsp;· Houston,&nbsp;Texas&nbsp;· Summer&nbsp;2025</p>
           <p class="cstatus" style="--c:#E3A008"><i></i>Hospital seeking funding</p>
           <p class="csum">A rooftop garden that supports patient healing and staff wellness at the Neal Cancer Center, designed with Texas A&amp;M graduate interns and presented to hospital stakeholders. The hospital is continuing the project and using this design to apply for funding.</p>
+          
         </div>
         <dl class="facts"><div><dt>Program</dt><dd>Texas A&amp;M Partnership for Community Outreach</dd></div><div><dt>Faculty advisor</dt><dd>Kenneth Hurst, PhD, RLA</dd></div><div><dt>My role</dt><dd>Assistant advisor and client coordinator</dd></div><div><dt>Team</dt><dd>MLA student interns</dd></div><div><dt>Deliverables</dt><dd>Site documentation, concept, schematic and final plans, sections, 3D visualizations</dd></div></dl>
       </div>
@@ -744,7 +809,7 @@ h3{margin:0 0 10px;font-stretch:112%;font-weight:600;font-size:22px;line-height:
     </article>
 
     <h3 class="center more-h">More projects</h3>
-    <ul class="plist"><li style="--c:#2E9E5B"><h4>Harrison County Trail Design</h4><p class="pmeta"><span>Harrison County, Texas</span><span>Texas A&amp;M AgriLife</span><span>2026</span></p><p>A multi-use trail system designed from site survey and LiDAR terrain data, with three trail types, CAD plans, parking layouts, and construction cost estimates.</p></li><li style="--c:#E3A008"><h4>Alto Landscape Design</h4><p class="pmeta"><span>Alto, Texas</span><span>Texas A&amp;M AgriLife</span><span>2026</span></p><p>Site and landscape proposals for the City of Alto, including circulation, parking, and cost estimates to support funding applications.</p></li><li style="--c:#2F7FD8"><h4>Landscape Design Feasibility Tool</h4><p class="pmeta"><span>Texas communities</span><span>Texas A&amp;M AgriLife</span><span>2026</span></p><p>Cost tables, budgeting worksheets, and lifecycle planning tools that help small communities price trails, parking, signage, planting, and lighting.</p></li><li style="--c:#12A594"><h4>Precinct 4 Parks Master Plan</h4><p class="pmeta"><span>Montgomery County, Texas</span><span>Texas A&amp;M PCO</span><span>2025</span></p><p>Park inventory, recreation-standard analysis, and concept plans for nine parks covering more than 160 acres.</p></li></ul>
+    <ul class="plist"><li style="--c:#2E9E5B"><h4>Harrison County Trail Design</h4><p class="pmeta"><span>Harrison County, Texas</span><span>Texas A&amp;M AgriLife</span><span>2026</span></p><p>A multi-use trail system designed from site survey and LiDAR terrain data, with three trail types, CAD plans, parking layouts, and construction cost estimates.</p></li><li style="--c:#E3A008"><h4>Alto Landscape Design</h4><p class="pmeta"><span>Alto, Texas</span><span>Texas A&amp;M AgriLife</span><span>2026</span></p><p>Site and landscape proposals for the City of Alto, including circulation, parking, and cost estimates to support funding applications.</p></li><li style="--c:#12A594"><h4>Precinct 4 Parks Master Plan</h4><p class="pmeta"><span>Montgomery County, Texas</span><span>Texas A&amp;M PCO</span><span>2025</span></p><p>Park inventory, recreation-standard analysis, and concept plans for nine parks covering more than 160 acres.</p></li></ul>
   </div>
 </section>
 
